@@ -1,4 +1,4 @@
-const nmea = require('./extended-nmea.js');
+import * as nmea from "./extended-nmea.js";
 
 const s = [
 	"$GPGSA,A,3,27,08,11,10,26,21,18,16,07,20,,,1.60,0.97,1.27*0F",

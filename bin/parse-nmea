@@ -1,8 +1,10 @@
 #!/usr/bin/env node
 
-const Liner = require('../liner.js');
+import Liner from "../liner.js";
+import {createDefaultTransformer} from "../extended-nmea.js";
+import {stringify} from "JSONStream";
 
 process.stdin.resume();
 process.stdin.setEncoding('utf8');
 
-process.stdin.pipe(new Liner()).pipe(require('../extended-nmea.js').createDefaultTransformer()).pipe(require('JSONStream').stringify(false)).pipe(process.stdout);
+process.stdin.pipe(new Liner()).pipe(createDefaultTransformer()).pipe(stringify(false)).pipe(process.stdout);

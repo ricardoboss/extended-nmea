@@ -1,8 +1,11 @@
-const should = require('should');
+import {encode, parse} from "../extended-nmea.js";
 
-describe('GGA ', function () {
+import 'should';
+
+describe('GGA', function () {
 	it('parses', function () {
-		const msg = require("../extended-nmea.js").parse("$IIGGA,123519,4807.04,N,1131.00,E,1,8,0.9,545.9,M,46.9,M,,*52");
+		const msg = parse("$IIGGA,123519,4807.04,N,1131.00,E,1,8,0.9,545.9,M,46.9,M,,*52");
+
 		msg.should.have.property('type', 'fix');
 		msg.should.have.property('sentence', 'GGA');
 		msg.should.have.property('talker_id', 'II');
@@ -19,12 +22,9 @@ describe('GGA ', function () {
 		msg.should.have.property('geoidalSep', 46.9);
 		msg.should.have.property('geoidalSepUnit', 'M');
 	});
-});
 
-
-describe('GGA', function () {
-	it('encodes ok', function () {
-		const nmeaMsg = require("../extended-nmea.js").encode('II', {
+	it('encodes', function () {
+		const nmeaMsg = encode('II', {
 			type: 'fix',
 			timestamp: new Date(Date.UTC(2013, 1, 1, 12, 35, 19)),
 			lat: 4807.04,
@@ -39,6 +39,7 @@ describe('GGA', function () {
 			geoidalSep: 46.9,
 			geoidalSepUnit: 'M'
 		});
+
 		nmeaMsg.should.equal("$IIGGA,123519,4807.04,N,1131.00,E,1,8,0.9,545.9,M,46.9,M,,*52");
 	});
 });

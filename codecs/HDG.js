@@ -1,5 +1,3 @@
-const helpers = require("../helpers.js");
-
 /*
  === HDG - Magnetic heading, deviation, variation ===
 
@@ -23,7 +21,6 @@ export const TYPE = 'heading-deviation-variation';
 export const ID = 'HDG';
 
 export function decode(fields) {
-	console.log(fields);
 	return {
 		sentence: ID,
 		type: 'heading-deviation-variation',

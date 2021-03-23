@@ -2,28 +2,26 @@
 
 import through from "through";
 
-const MWV = require('./codecs/MWV.js');
-const VTG = require('./codecs/VTG.js');
-const DBT = require('./codecs/DBT.js');
-const GLL = require('./codecs/GLL.js');
-const BWC = require('./codecs/BWC.js');
-const GSV = require('./codecs/GSV.js');
-const GSA = require('./codecs/GSA.js');
-const GGA = require('./codecs/GGA.js');
-const RMB = require('./codecs/RMB.js');
-const RMC = require('./codecs/RMC.js');
-const RSA = require('./codecs/RSA.js');
-const APB = require('./codecs/APB.js');
-const HDG = require('./codecs/HDG.js');
-const HDT = require('./codecs/HDT.js');
-const HDM = require('./codecs/HDM.js');
-const RDID = require('./codecs/RDID.js');
-const GRMT = require('./codecs/GRMT.js');
-const VWR = require('./codecs/VWR.js');
-const ROT = require('./codecs/ROT.js');
-
 // export helpers
-export const Helpers = require('./helpers.js');
+import * as ROT from "./codecs/ROT.js";
+import * as VWR from "./codecs/VWR.js";
+import * as GRMT from "./codecs/GRMT.js";
+import * as RDID from "./codecs/RDID.js";
+import * as HDM from "./codecs/HDM.js";
+import * as HDT from "./codecs/HDT.js";
+import * as HDG from "./codecs/HDG.js";
+import * as APB from "./codecs/APB.js";
+import * as RSA from "./codecs/RSA.js";
+import * as RMC from "./codecs/RMC.js";
+import * as RMB from "./codecs/RMB.js";
+import * as GGA from "./codecs/GGA.js";
+import * as GSA from "./codecs/GSA.js";
+import * as GSV from "./codecs/GSV.js";
+import * as BWC from "./codecs/BWC.js";
+import * as GLL from "./codecs/GLL.js";
+import * as DBT from "./codecs/DBT.js";
+import * as VTG from "./codecs/VTG.js";
+import * as MWV from "./codecs/MWV.js";
 
 const validLine = function (line) {
 	// check that the line passes checksum validation

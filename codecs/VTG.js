@@ -1,4 +1,4 @@
-const helpers = require("../helpers.js");
+import {computeChecksum, encodeDegrees, encodeFixed} from "../helpers.js";
 /*
  === VTG - Track made good and Ground speed ===
 
@@ -56,15 +56,15 @@ export function decode(fields) {
 
 export function encode(talker, msg) {
 	const result = ['$' + talker + ID];
-	result.push(helpers.encodeDegrees(msg.trackTrue));
+	result.push(encodeDegrees(msg.trackTrue));
 	result.push('T');
-	result.push(helpers.encodeDegrees(msg.trackMagnetic));
+	result.push(encodeDegrees(msg.trackMagnetic));
 	result.push('M');
-	result.push(helpers.encodeFixed(msg.speedKnots, 2));
+	result.push(encodeFixed(msg.speedKnots, 2));
 	result.push('N');
 	result.push('');
 	result.push('');
 	result.push('A');
 	const resultMsg = result.join(',');
-	return resultMsg + helpers.computeChecksum(resultMsg);
+	return resultMsg + computeChecksum(resultMsg);
 }

@@ -1,4 +1,4 @@
-const Transform = require('stream').Transform;
+import {Transform} from "stream";
 
 function Liner() {
   Transform.call(this, { objectMode: true });

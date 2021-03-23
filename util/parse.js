@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
-const lineReader = require('line-reader');
-const nmea = require('../extended-nmea.js');
+import lineReader from "line-reader";
+import nmea from "../extended-nmea.js";
 
 lineReader.eachLine(process.argv[2], function (line, last) {
 	const sentence = nmea.parse(line);

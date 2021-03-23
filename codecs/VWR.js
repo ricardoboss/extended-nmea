@@ -1,4 +1,3 @@
-const helpers = require("../helpers.js");
 /*
 === VWR Relative Wind Speed and Angle ===
 

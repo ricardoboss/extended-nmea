@@ -1,4 +1,4 @@
-const helpers = require("../helpers.js");
+import {computeChecksum, encodeFixed} from "../helpers.js";
 /*
  === ROT - Rate Of Turn ===
 
@@ -28,8 +28,8 @@ export function decode(fields) {
 
 export function encode(talker, msg) {
 	const result = ['$' + talker + ID];
-	result.push(helpers.encodeFixed(msg.rateOfTurn, 2));
+	result.push(encodeFixed(msg.rateOfTurn, 2));
 	result.push('A');
 	const resultMsg = result.join(',');
-	return resultMsg + helpers.computeChecksum(resultMsg);
+	return resultMsg + computeChecksum(resultMsg);
 }

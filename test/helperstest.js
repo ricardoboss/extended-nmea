@@ -1,15 +1,16 @@
-const should = require('should');
+import {padLeft, parseDateTime} from "../helpers.js";
 
-describe('helpers ', function () {
+import 'should';
 
-	it('padLeft', function () {
-		const msg = require("../helpers.js").padLeft("abc", 5, " ");
+describe('helpers', function () {
+	it('pads left', function () {
+		const msg = padLeft("abc", 5, " ");
 		msg.should.equal("  abc");
 	});
 
-	it('parseDateTime', function () {
+	it('parses DateTime', function () {
 		// Input = 3rd of April of 2005
-		const dt = require("../helpers.js").parseDateTime("030405", "112233");
+		const dt = parseDateTime("030405", "112233");
 		(+dt.getUTCDate()).should.equal(3);
 		(+dt.getUTCMonth() + 1).should.equal(4);
 		(+dt.getUTCFullYear()).should.equal(2005);
@@ -17,6 +18,4 @@ describe('helpers ', function () {
 		(+dt.getUTCMinutes()).should.equal(22);
 		(+dt.getUTCSeconds()).should.equal(33);
 	});
-
 });
-

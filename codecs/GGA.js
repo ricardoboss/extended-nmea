@@ -1,4 +1,12 @@
-const helpers = require("../helpers.js");
+import {
+	computeChecksum,
+	encodeAltitude,
+	encodeDegrees,
+	encodeFixed,
+	encodeGeoidalSeperation,
+	encodeTime,
+	encodeValue
+} from "../helpers.js";
 
 export const TYPE = 'fix';
 export const ID = 'GGA';
@@ -54,19 +62,19 @@ export function decode(fields) {
 
 export function encode(talker, msg) {
 	const result = ['$' + talker + ID];
-	result.push(helpers.encodeTime(msg.timestamp));
-	result.push(helpers.encodeDegrees(msg.lat));
+	result.push(encodeTime(msg.timestamp));
+	result.push(encodeDegrees(msg.lat));
 	result.push(msg.latPole);
-	result.push(helpers.encodeDegrees(msg.lon));
+	result.push(encodeDegrees(msg.lon));
 	result.push(msg.lonPole);
-	result.push(FIX_TYPE.indexOf(msg.fixType));
-	result.push(helpers.encodeValue(msg.numSat));
-	result.push(helpers.encodeFixed(msg.horDilution, 1));
-	result.push(helpers.encodeAltitude(msg.alt));
-	result.push(helpers.encodeGeoidalSeperation(msg.geoidalSep));
-	result.push(helpers.encodeFixed(msg.differentialAge, 2));
+	result.push(FIX_TYPE.indexOf(msg.fixType).toFixed(0));
+	result.push(encodeValue(msg.numSat));
+	result.push(encodeFixed(msg.horDilution, 1));
+	result.push(encodeAltitude(msg.alt));
+	result.push(encodeGeoidalSeperation(msg.geoidalSep));
+	result.push(encodeFixed(msg.differentialAge, 2));
 	result.push(msg.differentialRefStn);
 
 	const resultMsg = result.join(',');
-	return resultMsg + helpers.computeChecksum(resultMsg);
+	return resultMsg + computeChecksum(resultMsg);
 }

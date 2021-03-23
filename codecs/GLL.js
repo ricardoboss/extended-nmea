@@ -1,5 +1,4 @@
-const helpers = require("../helpers.js");
-
+import {computeChecksum, encodeDegrees, encodeTime} from "../helpers.js";
 /*
 === GLL - Geographic Position - Latitude/Longitude ===
 
@@ -28,25 +27,24 @@ export function decode(fields) {
 	return {
 		sentence: ID,
 		type: 'geo-position',
-		timestamp: fields[5],
 		lat: fields[1],
 		latPole: fields[2],
 		lon: fields[3],
 		lonPole: fields[4],
 		timestamp: fields[5],
-		status: fields[6] == 'A' ? 'valid' : 'invalid'
+		status: fields[6] === 'A' ? 'valid' : 'invalid'
 	};
 }
 
 export function encode(talker, msg) {
 	const result = ['$' + talker + ID];
-	result.push(helpers.encodeDegrees(msg.lat));
+	result.push(encodeDegrees(msg.lat));
 	result.push(msg.latPole);
-	result.push(helpers.encodeDegrees(msg.lon));
+	result.push(encodeDegrees(msg.lon));
 	result.push(msg.lonPole);
-	result.push(helpers.encodeTime(msg.timestamp));
+	result.push(encodeTime(msg.timestamp));
 	result.push('A');
 	result.push('D');
 	const resultMsg = result.join(',');
-	return resultMsg + helpers.computeChecksum(resultMsg);
+	return resultMsg + computeChecksum(resultMsg);
 }

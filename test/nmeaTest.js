@@ -1,16 +1,15 @@
-const should = require('should');
+import * as nmea from "../extended-nmea.js";
 
+import 'should';
 
-describe('Encoding unknown', function () {
-	it('undefined throws error', function () {
-		const nmea = require("../extended-nmea.js");
+describe('NMEA', function () {
+	it('throws error on undefined parameter', function () {
 		(function () {
 			nmea.encode(undefined);
 		}).should.throw("Can not encode undefined, did you forget msg parameter?");
 	});
 
-	it('no type throws error', function () {
-		const nmea = require("../extended-nmea.js");
+	it('throws error on unknown type', function () {
 		(function () {
 			nmea.encode('II', {type: "foo"});
 		}).should.throw("No encoder for type:foo");

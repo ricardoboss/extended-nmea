@@ -1,4 +1,4 @@
-const helpers = require("../helpers.js");
+import {computeChecksum, encodeDegrees, encodeFixed} from "../helpers.js";
 /*
  === MWV - Wind Speed and Angle ===
 
@@ -34,11 +34,11 @@ export function decode(fields) {
 
 export function encode(talker, msg) {
 	const result = ['$' + talker + ID];
-	result.push(helpers.encodeDegrees(msg.angle));
+	result.push(encodeDegrees(msg.angle));
 	result.push(msg.reference);
-	result.push(helpers.encodeFixed(msg.speed, 2));
+	result.push(encodeFixed(msg.speed, 2));
 	result.push(msg.units);
 	result.push(typeof msg.status === undefined ? 'A' : msg.status);
 	const resultMsg = result.join(',');
-	return resultMsg + helpers.computeChecksum(resultMsg);
+	return resultMsg + computeChecksum(resultMsg);
 }

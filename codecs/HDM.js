@@ -1,4 +1,4 @@
-const helpers = require("../helpers.js");
+import {computeChecksum, encodeFixed} from "../helpers.js";
 /*
  === HDM - Heading - Magnetic ===
 
@@ -27,8 +27,8 @@ export function decode(fields) {
 
 export function encode(talker, msg) {
 	const result = ['$' + talker + ID];
-	result.push(helpers.encodeFixed(msg.heading, 1));
+	result.push(encodeFixed(msg.heading, 1));
 	result.push('M');
 	const resultMsg = result.join(',');
-	return resultMsg + helpers.computeChecksum(resultMsg);
+	return resultMsg + computeChecksum(resultMsg);
 }

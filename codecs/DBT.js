@@ -1,5 +1,4 @@
-const helpers = require("../helpers.js");
-
+import {computeChecksum, encodeFixed} from "../helpers.js";
 /*
  === DBT - Depth below transducer ===
 
@@ -34,12 +33,12 @@ export function decode(fields) {
 
 export function encode(talker, msg) {
 	const result = ['$' + talker + ID];
-	result.push(helpers.encodeFixed(msg.depthFeet, 2));
+	result.push(encodeFixed(msg.depthFeet, 2));
 	result.push('f');
-	result.push(helpers.encodeFixed(msg.depthMeters, 2));
+	result.push(encodeFixed(msg.depthMeters, 2));
 	result.push('M');
-	result.push(helpers.encodeFixed(msg.depthFathoms, 2));
+	result.push(encodeFixed(msg.depthFathoms, 2));
 	result.push('F');
 	const resultMsg = result.join(',');
-	return resultMsg + helpers.computeChecksum(resultMsg);
+	return resultMsg + computeChecksum(resultMsg);
 }

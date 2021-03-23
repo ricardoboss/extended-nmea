@@ -1,8 +1,11 @@
-const should = require('should');
+import {parse} from "../extended-nmea.js";
 
-describe('GRMT ', function () {
+import 'should';
+
+describe('GRMT', function () {
 	it('parses', function () {
-		const msg = require("../extended-nmea.js").parse("$PGRMT,GPS19x-HVS Software Version 2.20,,,,,,,,*6F");
+		const msg = parse("$PGRMT,GPS19x-HVS Software Version 2.20,,,,,,,,*6F");
+
 		msg.should.have.property('type', 'sensor-information');
 		msg.should.have.property('sentence', 'GRMT');
 	});
