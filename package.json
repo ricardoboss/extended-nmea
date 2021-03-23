@@ -25,6 +25,6 @@
         "through": ">=2.2.7 <3"
     },
     "scripts": {
-        "test": "mocha"
+        "test": "npx mocha --ui bdd --reporter list"
     }
 }
