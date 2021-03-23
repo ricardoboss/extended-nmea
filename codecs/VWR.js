@@ -1,4 +1,3 @@
-var helpers = require("../helpers.js")
 /*
 === VWR Relative Wind Speed and Angle ===
 
@@ -12,7 +11,7 @@ $--VWR,x.x,a,x.x,N,x.x,M,x.x,K*hh
 ------------------------------------------------------------------------------
 
 Field Number:
- 
+
 1) Wind direction magnitude in degrees
 2) Wind direction Left/Right of bow
 3) Speed
@@ -23,17 +22,17 @@ Field Number:
 8) K = Kilometers Per Hour
 9) Checksum
  */
-exports.TYPE = 'wind-relative';
-exports.ID = 'VWR';
+export const TYPE = 'wind-relative';
+export const ID = 'VWR';
 
-exports.decode = function(fields) {
-  return {
-    sentence: exports.ID,
-    type: exports.TYPE,
-    angle: +fields[1],
-    direction: fields[2],
-    speedKnots: +fields[3],
-    speedMs: +fields[5],
-    speedKmph: +fields[7]
-  }
+export function decode(fields) {
+	return {
+		sentence: ID,
+		type: TYPE,
+		angle: +fields[1],
+		direction: fields[2],
+		speedKnots: +fields[3],
+		speedMs: +fields[5],
+		speedKmph: +fields[7]
+	}
 }

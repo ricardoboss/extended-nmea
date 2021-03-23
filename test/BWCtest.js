@@ -1,10 +1,11 @@
-var should = require('should');
+import {parse} from "../extended-nmea.js";
 
-describe('BWC ', function () {
-  it('parses', function () {
-    var msg = require("../extended-nmea.js").parse("$GPBWC,220516,5130.02,N,00046.34,W,213.8,T,218.0,M,0004.6,N,EGLM*21");
-    msg.should.have.property('type', '2waypoint');
-    msg.should.have.property('sentence', 'BWC');
-  });
+import 'should';
+
+describe('BWC', function () {
+	it('parses', function () {
+		const msg = parse("$GPBWC,220516,5130.02,N,00046.34,W,213.8,T,218.0,M,0004.6,N,EGLM*21");
+		msg.should.have.property('type', '2waypoint');
+		msg.should.have.property('sentence', 'BWC');
+	});
 });
-

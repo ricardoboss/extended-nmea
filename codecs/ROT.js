@@ -1,4 +1,4 @@
-var helpers = require("../helpers.js")
+import {computeChecksum, encodeFixed} from "../helpers.js";
 /*
  === ROT - Rate Of Turn ===
 
@@ -14,22 +14,22 @@ var helpers = require("../helpers.js")
  2. Status, "A" means data is valid
  3. Checksum
  */
-exports.TYPE = 'rate-of-turn';
-exports.ID = 'ROT';
+export const TYPE = 'rate-of-turn';
+export const ID = 'ROT';
 
-exports.decode = function (fields) {
-  return {
-    sentence: exports.ID,
-    type: exports.TYPE,
-    rateOfTurn: +fields[1],
-    valid: fields[2] === "A",
-  }
-};
+export function decode(fields) {
+	return {
+		sentence: ID,
+		type: TYPE,
+		rateOfTurn: +fields[1],
+		valid: fields[2] === "A",
+	}
+}
 
-exports.encode = function (talker, msg) {
-  var result = ['$' + talker + exports.ID];
-  result.push(helpers.encodeFixed(msg.rateOfTurn, 2));
-  result.push('A');
-  var resultMsg = result.join(',');
-  return resultMsg + helpers.computeChecksum(resultMsg);
+export function encode(talker, msg) {
+	const result = ['$' + talker + ID];
+	result.push(encodeFixed(msg.rateOfTurn, 2));
+	result.push('A');
+	const resultMsg = result.join(',');
+	return resultMsg + computeChecksum(resultMsg);
 }

@@ -1,19 +1,21 @@
-var should = require('should');
+import {encode, parse} from "../extended-nmea.js";
 
-describe('HDT parsing', function () {
-  it('parse heading', function () {
-    var msg = require("../extended-nmea.js").parse("$IIHDT,234.2,T*25");
-    msg.should.have.property('sentence', 'HDT');
-    msg.should.have.property('heading', 234.2);
-  });
-});
+import 'should';
 
-describe('HDT encoding', function () {
-  it('encodes ok', function () {
-    var nmeaMsg = require("../extended-nmea.js").encode('II', {
-      type: 'heading-info',
-      heading: 234.2
-    });
-    nmeaMsg.should.equal("$IIHDT,234.2,T*25");
-  });
+describe('HDT', function () {
+	it('parses', function () {
+		const msg = parse("$IIHDT,234.2,T*25");
+
+		msg.should.have.property('sentence', 'HDT');
+		msg.should.have.property('heading', 234.2);
+	});
+
+	it('encodes', function () {
+		const nmeaMsg = encode('II', {
+			type: 'heading-info',
+			heading: 234.2
+		});
+
+		nmeaMsg.should.equal("$IIHDT,234.2,T*25");
+	});
 });

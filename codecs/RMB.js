@@ -27,25 +27,25 @@ Field Number:
 14) Checksum
 
  */
-exports.TYPE = 'nav-info-waypoint';
-exports.ID = 'RMB';
+export const TYPE = 'nav-info-waypoint';
+export const ID = 'RMB';
 
-exports.decode = function(fields) {
-  return {
-    sentence: exports.ID,
-    type: exports.TYPE,
-    status: fields[1] == 'V' ? 'warning' : 'valid',
-    crossTrackError: +fields[2],
-    steer: fields[3],
-    fromWaypoint: fields[4],
-    toWaypoint: fields[5],
-    lat: fields[6],
-    latPole: fields[7],
-    lon: fields[8],
-    lonPole: fields[9],
-    range: +fields[10],
-    bearing: +fields[11],
-    vmg: +fields[12],
-    arrived: fields[13] == 'A' ? true : false
-  };
+export function decode(fields) {
+	return {
+		sentence: ID,
+		type: TYPE,
+		status: fields[1] == 'V' ? 'warning' : 'valid',
+		crossTrackError: +fields[2],
+		steer: fields[3],
+		fromWaypoint: fields[4],
+		toWaypoint: fields[5],
+		lat: fields[6],
+		latPole: fields[7],
+		lon: fields[8],
+		lonPole: fields[9],
+		range: +fields[10],
+		bearing: +fields[11],
+		vmg: +fields[12],
+		arrived: fields[13] == 'A' ? true : false
+	};
 }

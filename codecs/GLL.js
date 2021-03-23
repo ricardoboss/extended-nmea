@@ -1,5 +1,4 @@
-var helpers = require("../helpers.js")
-
+import {computeChecksum, encodeDegrees, encodeTime} from "../helpers.js";
 /*
 === GLL - Geographic Position - Latitude/Longitude ===
 
@@ -9,7 +8,7 @@ var helpers = require("../helpers.js")
  $--GLL,llll.ll,a,yyyyy.yy,a,hhmmss.ss,a,m,*hh<CR><LF>
 ------------------------------------------------------------------------------
 
-Field Number: 
+Field Number:
 
 1. Latitude
 2. N or S (North or South)
@@ -21,32 +20,31 @@ Field Number:
 8. Checksum
  */
 
-exports.TYPE = 'geo-position';
-exports.ID = 'GLL';
+export const TYPE = 'geo-position';
+export const ID = 'GLL';
 
-exports.decode = function(fields) {
-        return {
-            sentence: exports.ID,
-            type: 'geo-position',
-            timestamp: fields[5],
-            lat: fields[1],
-            latPole: fields[2],
-            lon: fields[3],
-            lonPole: fields[4],
-            timestamp: fields[5],
-            status: fields[6] == 'A' ? 'valid' : 'invalid'
-        };
-    }
+export function decode(fields) {
+	return {
+		sentence: ID,
+		type: 'geo-position',
+		lat: fields[1],
+		latPole: fields[2],
+		lon: fields[3],
+		lonPole: fields[4],
+		timestamp: fields[5],
+		status: fields[6] === 'A' ? 'valid' : 'invalid'
+	};
+}
 
-exports.encode = function (talker, msg) {
-  var result = ['$' + talker + exports.ID];
-  result.push(helpers.encodeDegrees(msg.lat));
-  result.push(msg.latPole);
-  result.push(helpers.encodeDegrees(msg.lon));
-  result.push(msg.lonPole);
-  result.push(helpers.encodeTime(msg.timestamp));
-  result.push('A');
-  result.push('D');
-  var resultMsg = result.join(',');
-  return resultMsg + helpers.computeChecksum(resultMsg);
+export function encode(talker, msg) {
+	const result = ['$' + talker + ID];
+	result.push(encodeDegrees(msg.lat));
+	result.push(msg.latPole);
+	result.push(encodeDegrees(msg.lon));
+	result.push(msg.lonPole);
+	result.push(encodeTime(msg.timestamp));
+	result.push('A');
+	result.push('D');
+	const resultMsg = result.join(',');
+	return resultMsg + computeChecksum(resultMsg);
 }
