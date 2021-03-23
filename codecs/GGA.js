@@ -1,7 +1,7 @@
-var helpers = require("../helpers.js")
+const helpers = require("../helpers.js");
 
-exports.TYPE = 'fix';
-exports.ID = 'GGA';
+export const TYPE = 'fix';
+export const ID = 'GGA';
 
 /*
                                                      11
@@ -29,44 +29,44 @@ $--GGA,hhmmss.ss,llll.ll,a,yyyyy.yy,a,x,xx,x.x,x.x,M,x.x,M,x.x,xxxx*hh
 14) Differential reference station ID, 0000-1023
 15) Checksum
 */
-var FIX_TYPE = ['none', 'fix', 'delta','pps','rtk','frtk','estimated','manual','simulation'];
+const FIX_TYPE = ['none', 'fix', 'delta', 'pps', 'rtk', 'frtk', 'estimated', 'manual', 'simulation'];
 
-exports.decode = function(fields) {
-  return {
-    sentence: exports.ID,
-    type: exports.TYPE,
-    timestamp: fields[1],
-    lat: fields[2],
-    latPole: fields[3],
-    lon: fields[4],
-    lonPole: fields[5],
-    fixType: FIX_TYPE[+fields[6]],
-    numSat: +fields[7],
-    horDilution: +fields[8],
-    alt: +fields[9],
-    altUnit: fields[10],
-    geoidalSep: +fields[11],
-    geoidalSepUnit: fields[12],
-    differentialAge: +fields[13],
-    differentialRefStn: fields[14]
-  };
+export function decode(fields) {
+	return {
+		sentence: ID,
+		type: TYPE,
+		timestamp: fields[1],
+		lat: fields[2],
+		latPole: fields[3],
+		lon: fields[4],
+		lonPole: fields[5],
+		fixType: FIX_TYPE[+fields[6]],
+		numSat: +fields[7],
+		horDilution: +fields[8],
+		alt: +fields[9],
+		altUnit: fields[10],
+		geoidalSep: +fields[11],
+		geoidalSepUnit: fields[12],
+		differentialAge: +fields[13],
+		differentialRefStn: fields[14]
+	};
 }
 
-exports.encode = function (talker, msg) {
-  var result = ['$' + talker + exports.ID];
-  result.push(helpers.encodeTime(msg.timestamp));
-  result.push(helpers.encodeDegrees(msg.lat));
-  result.push(msg.latPole);
-  result.push(helpers.encodeDegrees(msg.lon));
-  result.push(msg.lonPole);
-  result.push(FIX_TYPE.indexOf(msg.fixType));
-  result.push(helpers.encodeValue(msg.numSat));
-  result.push(helpers.encodeFixed(msg.horDilution, 1));
-  result.push(helpers.encodeAltitude(msg.alt));
-  result.push(helpers.encodeGeoidalSeperation(msg.geoidalSep));
-  result.push(helpers.encodeFixed(msg.differentialAge, 2));
-  result.push(msg.differentialRefStn);
+export function encode(talker, msg) {
+	const result = ['$' + talker + ID];
+	result.push(helpers.encodeTime(msg.timestamp));
+	result.push(helpers.encodeDegrees(msg.lat));
+	result.push(msg.latPole);
+	result.push(helpers.encodeDegrees(msg.lon));
+	result.push(msg.lonPole);
+	result.push(FIX_TYPE.indexOf(msg.fixType));
+	result.push(helpers.encodeValue(msg.numSat));
+	result.push(helpers.encodeFixed(msg.horDilution, 1));
+	result.push(helpers.encodeAltitude(msg.alt));
+	result.push(helpers.encodeGeoidalSeperation(msg.geoidalSep));
+	result.push(helpers.encodeFixed(msg.differentialAge, 2));
+	result.push(msg.differentialRefStn);
 
-  var resultMsg = result.join(',');
-  return resultMsg + helpers.computeChecksum(resultMsg);
+	const resultMsg = result.join(',');
+	return resultMsg + helpers.computeChecksum(resultMsg);
 }

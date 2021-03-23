@@ -1,4 +1,4 @@
-var helpers = require("../helpers.js")
+const helpers = require("../helpers.js");
 /*
  === HDT - Heading - True ===
 
@@ -14,21 +14,21 @@ var helpers = require("../helpers.js")
  2) T = True
  3) Checksum
  */
-exports.TYPE = 'heading-info';
-exports.ID = 'HDT';
+export const TYPE = 'heading-info';
+export const ID = 'HDT';
 
-exports.decode = function (fields) {
-  return {
-    sentence: exports.ID,
-    type: 'heading-info',
-    heading: +fields[1]
-  }
-};
+export function decode(fields) {
+	return {
+		sentence: ID,
+		type: 'heading-info',
+		heading: +fields[1]
+	}
+}
 
-exports.encode = function (talker, msg) {
-  var result = ['$' + talker + exports.ID];
-  result.push(helpers.encodeFixed(msg.heading, 1));
-  result.push('T');
-  var resultMsg = result.join(',');
-  return resultMsg + helpers.computeChecksum(resultMsg);
-};
+export function encode(talker, msg) {
+	const result = ['$' + talker + ID];
+	result.push(helpers.encodeFixed(msg.heading, 1));
+	result.push('T');
+	const resultMsg = result.join(',');
+	return resultMsg + helpers.computeChecksum(resultMsg);
+}

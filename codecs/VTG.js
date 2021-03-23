@@ -1,4 +1,4 @@
-var helpers = require("../helpers.js")
+const helpers = require("../helpers.js");
 /*
  === VTG - Track made good and Ground speed ===
 
@@ -40,31 +40,31 @@ var helpers = require("../helpers.js")
  9. FAA mode indicator (NMEA 2.3 and later)
  10. Checksum
  */
-exports.TYPE = 'track-info';
-exports.ID = 'VTG';
+export const TYPE = 'track-info';
+export const ID = 'VTG';
 
-exports.decode = function (fields) {
-  return {
-    sentence: exports.ID,
-    type: 'track-info',
-    trackTrue: +fields[1],
-    trackMagnetic: +fields[3],
-    speedKnots: +fields[5],
-    speedKmph: +fields[7]
-  }
-};
+export function decode(fields) {
+	return {
+		sentence: ID,
+		type: 'track-info',
+		trackTrue: +fields[1],
+		trackMagnetic: +fields[3],
+		speedKnots: +fields[5],
+		speedKmph: +fields[7]
+	}
+}
 
-exports.encode = function (talker, msg) {
-  var result = ['$' + talker + exports.ID];
-  result.push(helpers.encodeDegrees(msg.trackTrue));
-  result.push('T');
-  result.push(helpers.encodeDegrees(msg.trackMagnetic));
-  result.push('M');
-  result.push(helpers.encodeFixed(msg.speedKnots, 2));
-  result.push('N');
-  result.push('');
-  result.push('');
-  result.push('A');
-  var resultMsg = result.join(',');
-  return resultMsg + helpers.computeChecksum(resultMsg);
+export function encode(talker, msg) {
+	const result = ['$' + talker + ID];
+	result.push(helpers.encodeDegrees(msg.trackTrue));
+	result.push('T');
+	result.push(helpers.encodeDegrees(msg.trackMagnetic));
+	result.push('M');
+	result.push(helpers.encodeFixed(msg.speedKnots, 2));
+	result.push('N');
+	result.push('');
+	result.push('');
+	result.push('A');
+	const resultMsg = result.join(',');
+	return resultMsg + helpers.computeChecksum(resultMsg);
 }

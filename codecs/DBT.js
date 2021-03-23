@@ -1,4 +1,4 @@
-var helpers = require("../helpers.js")
+const helpers = require("../helpers.js");
 
 /*
  === DBT - Depth below transducer ===
@@ -20,26 +20,26 @@ var helpers = require("../helpers.js")
  7. Checksum
  */
 
-exports.TYPE = 'depth-transducer';
-exports.ID = 'DBT';
+export const TYPE = 'depth-transducer';
+export const ID = 'DBT';
 
-exports.decode = function(fields) {
-  return {
-    sentence: exports.ID,
-    type: exports.TYPE,
-    depthMeters: +fields[3],
-    depthFeet: +fields[1]
-  }
+export function decode(fields) {
+	return {
+		sentence: ID,
+		type: TYPE,
+		depthMeters: +fields[3],
+		depthFeet: +fields[1]
+	}
 }
 
-exports.encode = function (talker, msg) {
-  var result = ['$' + talker + exports.ID];
-  result.push(helpers.encodeFixed(msg.depthFeet,2));
-  result.push('f');
-  result.push(helpers.encodeFixed(msg.depthMeters, 2));
-  result.push('M');
-  result.push(helpers.encodeFixed(msg.depthFathoms, 2));
-  result.push('F');
-  var resultMsg = result.join(',');
-  return resultMsg + helpers.computeChecksum(resultMsg);
+export function encode(talker, msg) {
+	const result = ['$' + talker + ID];
+	result.push(helpers.encodeFixed(msg.depthFeet, 2));
+	result.push('f');
+	result.push(helpers.encodeFixed(msg.depthMeters, 2));
+	result.push('M');
+	result.push(helpers.encodeFixed(msg.depthFathoms, 2));
+	result.push('F');
+	const resultMsg = result.join(',');
+	return resultMsg + helpers.computeChecksum(resultMsg);
 }

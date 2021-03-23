@@ -1,4 +1,4 @@
-var helpers = require("../helpers.js")
+const helpers = require("../helpers.js");
 
 /*
  === HDG - Magnetic heading, deviation, variation ===
@@ -17,20 +17,20 @@ $--HDG,x.x,x.x,a,x.x,a*hh
 4) Magnetic Variation degrees
 5) Magnetic Variation direction, E = Easterly, W = Westerly
 6) Checksum
- 
- */
-exports.TYPE = 'heading-deviation-variation';
-exports.ID = 'HDG';
 
-exports.decode = function (fields) {
-    console.log(fields);
-  return {
-    sentence: exports.ID,
-    type: 'heading-deviation-variation',
-    heading: +fields[1],
-    deviation: +fields[2],
-    deviationDirection: fields[3],
-    variation: +fields[4],
-    variationDirection: fields[5]
-  }
-};
+ */
+export const TYPE = 'heading-deviation-variation';
+export const ID = 'HDG';
+
+export function decode(fields) {
+	console.log(fields);
+	return {
+		sentence: ID,
+		type: 'heading-deviation-variation',
+		heading: +fields[1],
+		deviation: +fields[2],
+		deviationDirection: fields[3],
+		variation: +fields[4],
+		variationDirection: fields[5]
+	}
+}

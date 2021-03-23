@@ -23,20 +23,20 @@
  14. Checksum
  */
 
-exports.ID = 'BWC';
-exports.TYPE = '2waypoint';
+export const ID = 'BWC';
+export const TYPE = '2waypoint';
 
-exports.decode = function(fields) {
-  return {
-    sentence: exports.ID,
-    type: exports.TYPE,
-    lat: +fields[2],
-    latPole: fields[3],
-    lon: +fields[4],
-    lonPole: fields[5],
-    bearingtrue: +fields[6],
-    bearingmag: +fields[8],
-    distance: +fields[10],
-    id: fields[12]
-  }
+export function decode(fields) {
+	return {
+		sentence: ID,
+		type: TYPE,
+		lat: +fields[2],
+		latPole: fields[3],
+		lon: +fields[4],
+		lonPole: fields[5],
+		bearingtrue: +fields[6],
+		bearingmag: +fields[8],
+		distance: +fields[10],
+		id: fields[12]
+	}
 }

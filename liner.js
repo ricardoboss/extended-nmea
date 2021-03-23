@@ -1,4 +1,4 @@
-var Transform = require('stream').Transform;
+const Transform = require('stream').Transform;
 
 function Liner() {
   Transform.call(this, { objectMode: true });
@@ -6,10 +6,10 @@ function Liner() {
 
 Liner.prototype = {
   _transform: function (chunk, encoding, done) {
-    var data = chunk.toString()
+    let data = chunk.toString();
     if (this._lastLineData) data = this._lastLineData + data
 
-    var lines = data.split('\n')
+    const lines = data.split('\n');
     this._lastLineData = lines.splice(lines.length - 1, 1)[0]
 
     lines.forEach(this.push.bind(this))
@@ -31,9 +31,9 @@ function extend(base, sub) {
   // Also, do a recursive merge of two prototypes, so we don't overwrite
   // the existing prototype, but still maintain the inheritance chain
   // Thanks to @ccnokes
-  var origProto = sub.prototype;
+  const origProto = sub.prototype;
   sub.prototype = Object.create(base.prototype);
-  for (var key in origProto) {
+  for (let key in origProto) {
     sub.prototype[key] = origProto[key];
   }
   // Remember the constructor property was set wrong, let's fix it
@@ -46,4 +46,4 @@ function extend(base, sub) {
   });
 }
 
-module.exports = Liner;
+export default Liner;

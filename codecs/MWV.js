@@ -1,4 +1,4 @@
-var helpers = require("../helpers.js")
+const helpers = require("../helpers.js");
 /*
  === MWV - Wind Speed and Angle ===
 
@@ -17,28 +17,28 @@ var helpers = require("../helpers.js")
  5. Status, A = Data Valid
  6. Checksum
  */
-exports.TYPE = 'wind';
-exports.ID = 'MWV';
+export const TYPE = 'wind';
+export const ID = 'MWV';
 
-exports.decode = function(fields) {
-  return {
-    sentence: exports.ID,
-    type: exports.TYPE,
-    angle: +fields[1],
-    reference: fields[2],
-    speed: +fields[3],
-    units: fields[4],
-    status: fields[5]
-  }
+export function decode(fields) {
+	return {
+		sentence: ID,
+		type: TYPE,
+		angle: +fields[1],
+		reference: fields[2],
+		speed: +fields[3],
+		units: fields[4],
+		status: fields[5]
+	}
 }
 
-exports.encode = function(talker, msg) {
- var result = ['$' + talker + exports.ID];
-  result.push(helpers.encodeDegrees(msg.angle));
-  result.push(msg.reference);
-  result.push(helpers.encodeFixed(msg.speed, 2));
-  result.push(msg.units);
-  result.push(typeof msg.status === undefined ? 'A' : msg.status);
-  var resultMsg = result.join(',');
- return resultMsg + helpers.computeChecksum(resultMsg);
+export function encode(talker, msg) {
+	const result = ['$' + talker + ID];
+	result.push(helpers.encodeDegrees(msg.angle));
+	result.push(msg.reference);
+	result.push(helpers.encodeFixed(msg.speed, 2));
+	result.push(msg.units);
+	result.push(typeof msg.status === undefined ? 'A' : msg.status);
+	const resultMsg = result.join(',');
+	return resultMsg + helpers.computeChecksum(resultMsg);
 }

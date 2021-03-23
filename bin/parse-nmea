@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-var Liner = require('../liner.js');
+const Liner = require('../liner.js');
 
 process.stdin.resume();
 process.stdin.setEncoding('utf8');
