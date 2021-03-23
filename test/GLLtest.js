@@ -28,6 +28,6 @@ describe('GLL', function () {
 			status: 'valid'
 		});
 
-		nmeaMsg.should.equal("$IIGLL,6005.06,N,2332.34,E,201722,A,D*63");
+		nmeaMsg.should.equal("$IIGLL,6005.06,N,2332.34,E,211722,A,D*62");
 	});
 });
