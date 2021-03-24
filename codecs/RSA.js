@@ -13,16 +13,16 @@
  1. Rudder Angle
  2. Always A
  3. Checksum
- 
+
  */
 
-exports.TYPE = 'rudder';
-exports.ID = 'RSA';
+export const TYPE = 'rudder';
+export const ID = 'RSA';
 
-exports.decode = function(fields) {
-  return {
-    sentence: exports.ID,
-    type: exports.TYPE,
-    angle: +fields[1]
-  }
+export function decode(fields) {
+	return {
+		sentence: ID,
+		type: TYPE,
+		angle: +fields[1]
+	}
 }

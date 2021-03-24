@@ -1,6 +1,6 @@
 /*
    === RMC - Recommended Minimum Navigation Information ===
-   
+
    This is one of the sentences commonly emitted by GPS units.
 
    ------------------------------------------------------------------------------
@@ -24,23 +24,23 @@
     11) E or W
     12) Checksum
 */
-exports.TYPE = 'nav-info';
-exports.ID = 'RMC';
+export const TYPE = 'nav-info';
+export const ID = 'RMC';
 
-exports.decode = function(fields) {
-  return {
-    sentence: exports.ID,
-    type: exports.TYPE,
-    timestamp: fields[1],
-    status: fields[2] == 'V' ? 'warning' : 'valid',
-    lat: fields[3],
-    latPole: fields[4],
-    lon: fields[5],
-    lonPole: fields[6],
-    speedKnots: +fields[7],
-    trackTrue: +fields[8],
-    date: fields[9],
-    variation: +fields[10],
-    variationPole: fields[11]
-  };
+export function decode(fields) {
+	return {
+		sentence: ID,
+		type: TYPE,
+		timestamp: fields[1],
+		status: fields[2] == 'V' ? 'warning' : 'valid',
+		lat: fields[3],
+		latPole: fields[4],
+		lon: fields[5],
+		lonPole: fields[6],
+		speedKnots: +fields[7],
+		trackTrue: +fields[8],
+		date: fields[9],
+		variation: +fields[10],
+		variationPole: fields[11]
+	};
 }

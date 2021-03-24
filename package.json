@@ -2,6 +2,7 @@
     "name": "extended-nmea",
     "description": "A parser for the NMEA 0183 protocol and some additional formats.",
     "version": "1.0.0",
+    "type": "module",
     "authors": [
         "James Penn <james@jamespenn.co.uk>",
         "Ricardo Boss <contact@ricardoboss.de>"
@@ -24,6 +25,6 @@
         "through": ">=2.2.7 <3"
     },
     "scripts": {
-        "test": "mocha"
+        "test": "npx mocha --ui bdd"
     }
 }
