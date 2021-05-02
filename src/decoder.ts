@@ -5,13 +5,14 @@ import {IProprietarySentenceConstructor} from "./types/interfaces/IProprietarySe
 import {IQuerySentence} from "./types/interfaces/IQuerySentence";
 import {IProprietarySentence} from "./types/interfaces/IProprietarySentence";
 import {ITalkerSentence} from "./types/interfaces/ITalkerSentence";
-import {Sentence} from "./sentences/nmea/ROT";
+import * as Sentence from "./sentences";
 
 export class Decoder {
-	private static readonly TalkerCodecs: Map<string, ITalkerSentenceConstructor> = new Map([
+	private static readonly TalkerCodecs: Map<string, ITalkerSentenceConstructor> = new Map<string, ITalkerSentenceConstructor>([
+		[Sentence.GGA.ID, Sentence.GGA],
 		[Sentence.ROT.ID, Sentence.ROT],
 	]);
-	private static readonly ProprietaryCodecs: Map<string, IProprietarySentenceConstructor> = new Map();
+	private static readonly ProprietaryCodecs: Map<string, IProprietarySentenceConstructor> = new Map<string, IProprietarySentenceConstructor>();
 
 	public static register(id: string, sentence: ITalkerSentenceConstructor): void {
 		Decoder.TalkerCodecs.set(id, sentence);
