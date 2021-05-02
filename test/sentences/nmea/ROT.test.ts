@@ -1,12 +1,11 @@
 import {describe} from "mocha";
-import {Decoder} from "../../../src";
-import {CodecROT} from "../../../src/codecs/nmea/CodecROT";
+import {Sentence, Decoder} from "../../../src";
 import {expect} from "chai";
 
 describe('Sentence', function () {
 	describe('ROT', function () {
 		it('decodes values', function () {
-			const decodedRot = Decoder.decodeTalker<CodecROT>('$--ROT,-0.5,A*0E\r\n');
+			const decodedRot = Decoder.decodeTalker<Sentence.ROT>('$--ROT,-0.5,A*0E\r\n');
 
 			expect(decodedRot.valid).to.equal(true);
 			expect(decodedRot.talkerId).to.equal('--');

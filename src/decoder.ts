@@ -5,11 +5,11 @@ import {IProprietarySentenceConstructor} from "./types/interfaces/IProprietarySe
 import {IQuerySentence} from "./types/interfaces/IQuerySentence";
 import {IProprietarySentence} from "./types/interfaces/IProprietarySentence";
 import {ITalkerSentence} from "./types/interfaces/ITalkerSentence";
-import {CodecROT} from "./codecs/nmea/CodecROT";
+import {Sentence} from "./sentences/nmea/ROT";
 
 export class Decoder {
 	private static readonly TalkerCodecs: Map<string, ITalkerSentenceConstructor> = new Map([
-		[CodecROT.ID, CodecROT],
+		[Sentence.ROT.ID, Sentence.ROT],
 	]);
 	private static readonly ProprietaryCodecs: Map<string, IProprietarySentenceConstructor> = new Map();
 

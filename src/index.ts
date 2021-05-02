@@ -1,2 +1,2 @@
 export {Decoder} from './decoder';
-export {CodecROT} from './codecs/nmea/CodecROT';
+export {Sentence} from './sentences/nmea/ROT';
