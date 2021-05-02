@@ -2,6 +2,7 @@ import {RawNmeaSentence} from "./RawNmeaSentence";
 import {ChecksumSentence} from "./ChecksumSentence";
 import {NmeaSentence} from "./NmeaSentence";
 import {IProprietarySentence} from "../interfaces/IProprietarySentence";
+import {SentenceType} from "../SentenceType";
 
 export abstract class ProprietarySentence extends ChecksumSentence implements IProprietarySentence {
 	/**
@@ -27,5 +28,14 @@ export abstract class ProprietarySentence extends ChecksumSentence implements IP
 		super(data, SentenceType.Proprietary, prefix + manufacturerId, suffix);
 
 		this.manufacturerId = manufacturerId;
+	}
+
+	/**
+	 * Returns all characters between "$P" + the manufacturer id and "<CR><LF>".
+	 */
+	protected get dataNoFixtures(): string {
+		// Need to add prefix.length + 1 so the first "," is also cut away.
+		// This means "$PTEST,123,456<CR><LF>" becomes "123,456".
+		return this.raw.slice(this.prefix.length + 1, -this.suffix.length);
 	}
 }

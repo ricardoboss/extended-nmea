@@ -39,9 +39,14 @@ describe('Decoder', function () {
 			Decoder.registerProprietary(TestProprietarySentence.ManufacturerId, TestProprietarySentence);
 
 			const decoded = Decoder.decodeProprietary("$PTEST,123,456\r\n");
+			const decodedGeneric = Decoder.decodeProprietary<TestProprietarySentence>("$PTEST,123,456\r\n");
 
 			expect(decoded.valid).to.equal(true);
 			expect(decoded.manufacturerId).to.equal(TestProprietarySentence.ManufacturerId);
+
+			expect(decodedGeneric.valid).to.equal(true);
+			expect(decodedGeneric.manufacturerId).to.equal(TestProprietarySentence.ManufacturerId);
+			expect(decodedGeneric.firstField).to.equal("123");
 
 			Decoder.unregisterProprietary(TestProprietarySentence.ManufacturerId);
 		});
