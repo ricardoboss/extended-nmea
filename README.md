@@ -48,13 +48,19 @@ import {ProprietarySentence, RawNmeaSentence} from "extended-nmea";
 
 // you can also extend TalkerSentence to add a custom sentence in the form of "$AABBB,xxx*CC", where BBB is your custom id.
 class MyCustomSentence extends ProprietarySentence {
+	public static readonly ManufacturerId = "ABC";
+
+	constructor(data: RawNmeaSentence) {
+		super(data, MyCustomSentence.ManufacturerId);
+	}
+	
 	public get firstField(): string {
 		return this.fields[1];
 	}
 }
 
 // use `Decoder.register` for talker sentences
-Decoder.registerProprietary("ABC", MyCustomSentence);
+Decoder.registerProprietary(MyCustomSentence.ManufacturerId, MyCustomSentence);
 
 const myCustomSentence = Decoder.decode("$PABC,123\r\n");
 

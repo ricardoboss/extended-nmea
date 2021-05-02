@@ -1,6 +1,6 @@
 import {describe} from "mocha";
 import {expect} from "chai";
-import {Helpers} from "../src";
+import {Helpers} from "../src/helpers";
 
 describe('Helpers', function () {
 	describe('xorChecksum', function () {
