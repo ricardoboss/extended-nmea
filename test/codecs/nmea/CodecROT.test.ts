@@ -6,7 +6,7 @@ import {expect} from "chai";
 describe('Sentence', function () {
 	describe('ROT', function () {
 		it('decodes values', function () {
-			const decodedRot = Decoder.decode('$--ROT,-0.5,A*0E\r\n') as CodecROT;
+			const decodedRot = Decoder.decodeTalker<CodecROT>('$--ROT,-0.5,A*0E\r\n');
 
 			expect(decodedRot.valid).to.equal(true);
 			expect(decodedRot.talkerId).to.equal('--');
