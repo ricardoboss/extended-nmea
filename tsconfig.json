@@ -1,0 +1,17 @@
+{
+	"compilerOptions": {
+		"module": "CommonJS",
+		"target": "ES2015",
+		"declaration": true,
+		"noImplicitAny": true,
+		"sourceMap": true,
+		"sourceRoot": "src",
+		"outDir": "./dist",
+		"typeRoots": [
+			"node_modules/@types"
+		]
+	},
+	"include": [
+		"src/**/*"
+	]
+}
