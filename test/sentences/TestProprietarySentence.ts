@@ -7,4 +7,8 @@ export class TestProprietarySentence extends ProprietarySentence {
 	constructor(data: RawNmeaSentence) {
 		super(data, TestProprietarySentence.ManufacturerId);
 	}
+
+	public get firstField(): string {
+		return this.fields[0];
+	}
 }
