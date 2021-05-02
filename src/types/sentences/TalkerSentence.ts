@@ -2,6 +2,7 @@ import {RawNmeaSentence} from "./RawNmeaSentence";
 import {ChecksumSentence} from "./ChecksumSentence";
 import {ITalkerSentence} from "../interfaces/ITalkerSentence";
 import {NmeaSentence} from "./NmeaSentence";
+import {SentenceType} from "../SentenceType";
 
 export class TalkerSentence extends ChecksumSentence implements ITalkerSentence {
 	/**
@@ -19,7 +20,7 @@ export class TalkerSentence extends ChecksumSentence implements ITalkerSentence 
 	 * @param suffix The suffix to use when validating the sentence.
 	 */
 	constructor(data: RawNmeaSentence, talkerIdLength: number = 2, prefix: string = NmeaSentence.Prefix, suffix: string = NmeaSentence.Suffix) {
-		super(data, prefix, suffix);
+		super(data, SentenceType.Talker, prefix, suffix);
 
 		this.talkerIdLength = talkerIdLength;
 	}

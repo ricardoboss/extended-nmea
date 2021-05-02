@@ -24,7 +24,7 @@ export abstract class ProprietarySentence extends ChecksumSentence implements IP
 	 * @param suffix The suffix to use when validating the sentence.
 	 */
 	protected constructor(data: RawNmeaSentence, manufacturerId: string, prefix: string = ProprietarySentence.Prefix, suffix: string = NmeaSentence.Suffix) {
-		super(data, prefix + manufacturerId, suffix);
+		super(data, SentenceType.Proprietary, prefix + manufacturerId, suffix);
 
 		this.manufacturerId = manufacturerId;
 	}

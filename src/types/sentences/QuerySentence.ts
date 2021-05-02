@@ -1,6 +1,7 @@
 import {NmeaSentence} from "./NmeaSentence";
 import {RawNmeaSentence} from "./RawNmeaSentence";
 import {IQuerySentence} from "../interfaces/IQuerySentence";
+import {SentenceType} from "../SentenceType";
 
 export class QuerySentence extends NmeaSentence implements IQuerySentence {
 	/**
@@ -11,7 +12,7 @@ export class QuerySentence extends NmeaSentence implements IQuerySentence {
 	 * @param suffix The suffix to use when validating the sentence.
 	 */
 	constructor(data: RawNmeaSentence, prefix: string = NmeaSentence.Prefix, suffix: string = NmeaSentence.Suffix) {
-		super(data, prefix, suffix);
+		super(data, SentenceType.Query, prefix, suffix);
 	}
 
 	/**

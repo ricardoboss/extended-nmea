@@ -1,5 +1,6 @@
 import {INmeaSentence} from "../interfaces/INmeaSentence";
 import {RawNmeaSentence} from "./RawNmeaSentence";
+import {SentenceType} from "../SentenceType";
 
 export class NmeaSentence implements INmeaSentence {
 	/**
@@ -18,28 +19,35 @@ export class NmeaSentence implements INmeaSentence {
 	public readonly raw: string;
 
 	/**
+	 * The type of this sentence.
+	 */
+	public readonly type: SentenceType;
+
+	/**
 	 * The prefix to use when validating the sentence.
 	 */
-	private readonly prefix: string;
+	protected readonly prefix: string;
 
 	/**
 	 * The suffix to use when validating the sentence.
 	 */
-	private readonly suffix: string;
+	protected readonly suffix: string;
 
 	/**
 	 * Create a NMEA0183 sentence from a string.
 	 *
 	 * @param data The line to interpret as an NMEA0183 sentence. Can also be an existing Sentence.
+	 * @param type The type of this sentence.
 	 * @param prefix The prefix to use when validating the sentence.
 	 * @param suffix The suffix to use when validating the sentence.
 	 */
-	public constructor(data: RawNmeaSentence, prefix: string = NmeaSentence.Prefix, suffix: string = NmeaSentence.Suffix) {
+	public constructor(data: RawNmeaSentence, type: SentenceType, prefix: string = NmeaSentence.Prefix, suffix: string = NmeaSentence.Suffix) {
 		if (typeof data === 'string')
 			this.raw = data;
 		else
 			this.raw = data.raw;
 
+		this.type = type;
 		this.prefix = prefix;
 		this.suffix = suffix;
 	}

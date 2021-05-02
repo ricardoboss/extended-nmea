@@ -1,3 +1,5 @@
+import {SentenceType} from "../SentenceType";
+
 export interface INmeaSentence {
 	/**
 	 * The raw line given to the constructor.
@@ -18,4 +20,9 @@ export interface INmeaSentence {
 	 * Returns all fields (including the first field in the sentence) separated by comma.
 	 */
 	readonly fields: string[];
+
+	/**
+	 * The type of this sentence.
+	 */
+	readonly type: SentenceType;
 }

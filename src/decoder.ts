@@ -48,16 +48,16 @@ export class Decoder {
 		return new QuerySentence(data);
 	}
 
-	public static decodeProprietary(data: string): IProprietarySentence {
+	public static decodeProprietary<T extends IProprietarySentence>(data: string): T {
 		const manufacturerId = data.substr(2, data.indexOf(',') - 2);
 		if (!Decoder.ProprietaryCodecs.has(manufacturerId))
 			throw new Error(`Unable to decode sentence: unknown manufacturer id for proprietary sentence: ${manufacturerId}`);
 
 		const sentenceConstructor = Decoder.ProprietaryCodecs.get(manufacturerId);
-		return new sentenceConstructor(data, manufacturerId);
+		return new sentenceConstructor(data, manufacturerId) as T;
 	}
 
-	public static decodeTalker(data: string): ITalkerSentence {
+	public static decodeTalker<T extends ITalkerSentence>(data: string): T {
 		if (data.length < 6)
 			throw new Error(`Unable to decode sentence: invalid format. Expected at least 6 characters, got: ${data} (${data.length} characters)`);
 
@@ -67,6 +67,6 @@ export class Decoder {
 			throw new Error(`Unable to decode sentence: unknown sentence id: ${sentenceId}`);
 
 		const sentenceConstructor = Decoder.TalkerCodecs.get(sentenceId);
-		return new sentenceConstructor(data, talkerIdLength);
+		return new sentenceConstructor(data, talkerIdLength) as T;
 	}
 }
