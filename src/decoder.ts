@@ -11,6 +11,7 @@ export class Decoder {
 	private static readonly TalkerCodecs: Map<string, ITalkerSentenceConstructor> = new Map<string, ITalkerSentenceConstructor>([
 		[Sentence.GGA.ID, Sentence.GGA],
 		[Sentence.ROT.ID, Sentence.ROT],
+		[Sentence.HDT.ID, Sentence.HDT],
 	]);
 	private static readonly ProprietaryCodecs: Map<string, IProprietarySentenceConstructor> = new Map<string, IProprietarySentenceConstructor>();
 
