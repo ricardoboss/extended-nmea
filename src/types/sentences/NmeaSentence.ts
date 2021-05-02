@@ -65,8 +65,7 @@ export class NmeaSentence implements INmeaSentence {
 		// MAYBE: add an option for sentences to be able to omit <CR><LF> (e.g. when parsing a string from a readline which automatically removes the line delimiters).
 
 		return this.raw.startsWith(this.prefix) &&
-			this.raw.endsWith(this.suffix) &&
-			this.dataNoFixtures.length < 80;
+			this.raw.endsWith(this.suffix);
 	}
 
 	/**
