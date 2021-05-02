@@ -26,16 +26,16 @@ export class GGA extends TalkerSentence {
 		return parseTime(this.dataFields[0]);
 	}
 
-	public get latitude(): number {
+	public get latitude(): Latitude {
 		return parseFloat(this.dataFields[1]);
-	}
-
-	public get longitude(): number {
-		return parseFloat(this.dataFields[3]);
 	}
 
 	public get north(): boolean {
 		return this.dataFields[2] === 'N';
+	}
+
+	public get longitude(): Longitude {
+		return parseFloat(this.dataFields[3]);
 	}
 
 	public get east(): boolean {
