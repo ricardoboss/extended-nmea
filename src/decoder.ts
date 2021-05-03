@@ -12,6 +12,7 @@ export class Decoder {
 		[Sentence.GGA.ID, Sentence.GGA],
 		[Sentence.ROT.ID, Sentence.ROT],
 		[Sentence.HDT.ID, Sentence.HDT],
+		[Sentence.RMC.ID, Sentence.RMC],
 	]);
 	private static readonly ProprietaryCodecs: Map<string, IProprietarySentenceConstructor> = new Map<string, IProprietarySentenceConstructor>();
 
