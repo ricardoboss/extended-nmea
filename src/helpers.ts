@@ -25,19 +25,22 @@ export module Helpers {
 	/**
 	 * Parses the given data into a TimeOnly representation.
 	 *
-	 * @param data The data, formatted as 'hhmmss.ss' where hh = hours, mm = minutes and ss.ss = seconds with decimals.
+	 * @param data The data, formatted as 'hhmmss.ss' where hh = hours, mm = minutes and ss.ss = seconds with decimals. The decimal part is optional.
 	 */
 	export function parseTime(data: string): TimeOnly {
 		if (typeof data !== 'string')
 			throw new TypeError(`Cannot use arguments of type '${typeof data}' as input.`);
 
-		if (data.length !== 9)
-			throw new Error(`Expected data formatted as 'hhmmss.ss', but found ${data.length} characters`);
+		if (data.length !== 6 && data.length !== 9)
+			throw new Error(`Expected data formatted as 'hhmmss.ss' or 'hhmmss', but found ${data.length} characters`);
 
 		let hours = parseInt(data.substr(0, 2));
 		let minutes = parseInt(data.substr(2, 2));
 		let seconds = parseInt(data.substr(4, 2));
-		let milliseconds = parseInt(data.substr(7, 2));
+
+		let milliseconds = 0;
+		if (data.length === 9)
+			milliseconds = parseInt(data.substr(7, 2));
 
 		return new TimeOnly(milliseconds, seconds, minutes, hours);
 	}
