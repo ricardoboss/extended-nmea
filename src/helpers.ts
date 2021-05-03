@@ -1,4 +1,5 @@
 import {TimeOnly} from "./types/util/TimeOnly";
+import {DateOnly} from "./types/util/DateOnly";
 
 export module Helpers {
 	/**
@@ -22,9 +23,9 @@ export module Helpers {
 	}
 
 	/**
-	 * Parses the given data into
+	 * Parses the given data into a TimeOnly representation.
 	 *
-	 * @param data
+	 * @param data The data, formatted as 'hhmmss.ss' where hh = hours, mm = minutes and ss.ss = seconds with decimals.
 	 */
 	export function parseTime(data: string): TimeOnly {
 		if (typeof data !== 'string')
@@ -39,5 +40,28 @@ export module Helpers {
 		let milliseconds = parseInt(data.substr(7, 2));
 
 		return new TimeOnly(milliseconds, seconds, minutes, hours);
+	}
+
+	/**
+	 * Parses the given data into a DateOnly representation.
+	 *
+	 * @param data The data, formatted as 'ddMMyy' where dd = day, MM = month and yy = year (< 73 means after 2000)
+	 */
+	export function parseDate(data: string): DateOnly {
+		if (typeof data !== 'string')
+			throw new TypeError(`Cannot use arguments of type '${typeof data}' as input.`);
+
+		if (data.length !== 6)
+			throw new Error(`Expected data formatted as 'ddMMyy', but found ${data.length} characters`);
+
+		let day = parseInt(data.substr(0, 2));
+		let month = parseInt(data.substr(2, 2));
+		let year = parseInt(data.substr(4, 2));
+		if (year < 73)
+			year += 2000;
+		else
+			year += 1900;
+
+		return new DateOnly(day, month, year);
 	}
 }
