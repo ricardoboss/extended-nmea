@@ -1,5 +1,5 @@
-import {TimeOnly} from "./types/util/TimeOnly";
-import {DateOnly} from "./types/util/DateOnly";
+import {TimeOnly} from "./types/utils/TimeOnly";
+import {DateOnly} from "./types/utils/DateOnly";
 
 export module Helpers {
 	/**

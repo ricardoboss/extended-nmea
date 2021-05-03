@@ -1,5 +1,5 @@
 import {TalkerSentence} from "../../types/sentences/TalkerSentence";
-import {TimeOnly} from "../../types/util/TimeOnly";
+import {TimeOnly} from "../../types/utils/TimeOnly";
 import {Helpers} from "../../helpers";
 import parseTime = Helpers.parseTime;
 
