@@ -1,2 +1,2 @@
-declare type Latitude = number;
-declare type Longitude = number;
+export type Latitude = number;
+export type Longitude = number;
