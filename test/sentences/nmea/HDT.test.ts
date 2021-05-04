@@ -5,12 +5,12 @@ import {expect} from "chai";
 describe('Sentence', function () {
 	describe('HDT', function () {
 		it('decodes values', function () {
-			const decodedRot = Decoder.decodeTalker<HDT>('$--HDT,286.3,T*2D\r\n');
+			const decoded = Decoder.decodeTalker<HDT>('$--HDT,286.3,T*2D\r\n');
 
-			expect(decodedRot.valid).to.equal(true);
-			expect(decodedRot.talkerId).to.equal('--');
-			expect(decodedRot.sentenceId).to.equal('HDT');
-			expect(decodedRot.heading).to.equal(286.3);
+			expect(decoded.valid).to.equal(true);
+			expect(decoded.talkerId).to.equal('--');
+			expect(decoded.sentenceId).to.equal('HDT');
+			expect(decoded.heading).to.equal(286.3);
 		});
 	});
 });
