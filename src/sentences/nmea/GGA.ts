@@ -3,7 +3,7 @@ import {Helpers} from "../../helpers";
 import parseTime = Helpers.parseTime;
 import {Latitude, Longitude, TimeOnly} from "../../types/utils";
 
-export enum GpsQualityIndicator {
+export enum GgaQualityIndicator {
 	No_Fix = 0,
 	Gps = 1,
 	DifferentialGPS = 2,
@@ -42,8 +42,8 @@ export class GGA extends TalkerSentence {
 		return this.dataFields[4] === 'E';
 	}
 
-	public get gpsQuality(): GpsQualityIndicator {
-		return parseInt(this.dataFields[5]) as GpsQualityIndicator;
+	public get gpsQuality(): GgaQualityIndicator {
+		return parseInt(this.dataFields[5]) as GgaQualityIndicator;
 	}
 
 	public get satellitesInView(): number {
