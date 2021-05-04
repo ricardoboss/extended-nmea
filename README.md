@@ -23,9 +23,9 @@ console.log(sentence.type);     // output: "talker"
 Every codec can have different getters:
 
 ```typescript
-import {CodecROT} from "extended-nmea";
+import {ROT} from "extended-nmea";
 
-const rotSentence = Decoder.decode("$--ROT,0.02,A*14\r\n") as CodecROT;
+const rotSentence = Decoder.decode("$--ROT,0.02,A*14\r\n") as ROT;
 
 console.log(rotSentence.rateOfTurn);    // output: 0.02
 console.log(rotSentence.statusValid);   // output: true
@@ -41,8 +41,10 @@ console.log(querySentence.talkerId);    // output: "GP"
 console.log(querySentence.listenerId);  // output: "EC"
 console.log(querySentence.mnemonic);    // output: "RMC"
 
+import {ROT} from "extended-nmea";
+
 // you can also use a generic parameter, if you know whether you are dealing with a talker or a proprietary sentence
-const genericSentence = Decoder.decodeTalker<CodecROT>("$--ROT,0.03,A*15\r\n");
+const genericSentence = Decoder.decodeTalker<ROT>("$--ROT,0.03,A*15\r\n");
 
 console.log(genericSentence.rateOfTurn);    // output: 0.03
 console.log(genericSentence.statusValid);   // output: true
