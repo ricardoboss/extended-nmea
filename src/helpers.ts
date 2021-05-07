@@ -1,4 +1,4 @@
-import {TimeOnly, DateOnly} from "./types";
+import {TimeOnly, DateOnly, GeoCoordinate} from "./types";
 
 export module Helpers {
 	/**
@@ -67,5 +67,9 @@ export module Helpers {
 			year += 1900;
 
 		return new DateOnly(day, month, year);
+	}
+
+	export function parseGeoCoordinate(encoded: string, quadrant: string): GeoCoordinate {
+		return new GeoCoordinate(encoded, quadrant);
 	}
 }

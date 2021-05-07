@@ -1,8 +1,9 @@
 import {TalkerSentence} from "../../types/sentences/TalkerSentence";
 import {Helpers} from "../../helpers";
-import {Latitude, Longitude, TimeOnly} from "../../types";
+import {GeoCoordinate, TimeOnly} from "../../types";
 import {RawNmeaSentence} from "../../types/sentences/RawNmeaSentence";
 import parseTime = Helpers.parseTime;
+import parseGeoCoordinate = Helpers.parseGeoCoordinate;
 
 export enum GgaQualityIndicator {
 	No_Fix = 0,
@@ -27,20 +28,12 @@ export class GGA extends TalkerSentence {
 		return parseTime(this.dataFields[0]);
 	}
 
-	public get latitude(): Latitude {
-		return parseFloat(this.dataFields[1]);
+	public get latitude(): GeoCoordinate {
+		return parseGeoCoordinate(this.dataFields[1], this.dataFields[2]);
 	}
 
-	public get north(): boolean {
-		return this.dataFields[2] === 'N';
-	}
-
-	public get longitude(): Longitude {
-		return parseFloat(this.dataFields[3]);
-	}
-
-	public get east(): boolean {
-		return this.dataFields[4] === 'E';
+	public get longitude(): GeoCoordinate {
+		return parseGeoCoordinate(this.dataFields[3], this.dataFields[4]);
 	}
 
 	public get gpsQuality(): GgaQualityIndicator {

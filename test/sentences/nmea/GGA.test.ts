@@ -11,10 +11,12 @@ describe('Sentence', function () {
 			expect(decoded.talkerId).to.equal('GP');
 			expect(decoded.sentenceId).to.equal('GGA');
 			expect(decoded.time.hours).to.equal(11);
-			expect(decoded.latitude).to.equal(4158.8441367); // TODO: create type for latitude and longitude
-			expect(decoded.north).to.equal(true);
-			expect(decoded.longitude).to.equal(9147.4416929);
-			expect(decoded.east).to.equal(false);
+			expect(decoded.latitude.degrees).to.equal(41);
+			expect(decoded.latitude.minutes).to.equal(58);
+			expect(decoded.latitude.quadrant).to.equal("N");
+			expect(decoded.longitude.degrees).to.equal(91);
+			expect(decoded.longitude.minutes).to.equal(47);
+			expect(decoded.longitude.quadrant).to.equal("W");
 			expect(decoded.gpsQuality).to.equal(GgaQualityIndicator.RTK);
 			expect(decoded.satellitesInView).to.equal(13);
 			expect(decoded.horizontalDOP).to.equal(0.9);
