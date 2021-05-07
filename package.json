@@ -1,7 +1,6 @@
 {
   "name": "extended-nmea",
-  "type": "module",
-  "version": "2.0.0-beta4",
+  "version": "2.0.0-beta5",
   "description": "A TypeScript library for parsing NMEA0183-like sentences with support for custom and proprietary sentences.",
   "repository": "https://github.com/ricardoboss/extended-nmea",
   "authors": [
@@ -18,7 +17,7 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
-    "/dist"
+    "./dist"
   ],
   "scripts": {
     "test": "cross-env TS_NODE_TRANSPILE_ONLY=true NODE_ENV=test mocha --ui bdd --recursive --require ts-node/register test/**/*.test.ts",
