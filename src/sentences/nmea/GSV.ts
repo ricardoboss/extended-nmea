@@ -44,6 +44,6 @@ export class GSV extends TalkerSentence {
 	}
 
 	public get valid(): boolean {
-		return super.valid && this.dataFields.length === 19;
+		return super.valid && (this.dataFields.length - 3) % 4 === 0;
 	}
 }
