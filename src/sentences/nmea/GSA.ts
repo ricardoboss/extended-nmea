@@ -1,4 +1,5 @@
 import {TalkerSentence} from "../../types/sentences/TalkerSentence";
+import {RawNmeaSentence} from "../../types/sentences/RawNmeaSentence";
 
 export enum GsaMode {
 	Manual = "M",
@@ -14,7 +15,7 @@ export enum GsaFix {
 export class GSA extends TalkerSentence {
 	public static readonly ID: string = "GSA"
 
-	constructor(data: string) {
+	constructor(data: RawNmeaSentence) {
 		super(data);
 	}
 

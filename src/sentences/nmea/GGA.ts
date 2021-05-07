@@ -1,7 +1,8 @@
 import {TalkerSentence} from "../../types/sentences/TalkerSentence";
 import {Helpers} from "../../helpers";
+import {Latitude, Longitude, TimeOnly} from "../../types";
+import {RawNmeaSentence} from "../../types/sentences/RawNmeaSentence";
 import parseTime = Helpers.parseTime;
-import {Latitude, Longitude, TimeOnly} from "../../types/utils";
 
 export enum GgaQualityIndicator {
 	No_Fix = 0,
@@ -18,7 +19,7 @@ export enum GgaQualityIndicator {
 export class GGA extends TalkerSentence {
 	public static readonly ID: string = "GGA"
 
-	constructor(data: string) {
+	constructor(data: RawNmeaSentence) {
 		super(data);
 	}
 

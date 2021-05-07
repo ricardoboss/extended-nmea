@@ -1,4 +1,5 @@
 import {TalkerSentence} from "../../types/sentences/TalkerSentence";
+import {RawNmeaSentence} from "../../types/sentences/RawNmeaSentence";
 
 export class GsvSatellite {
 	constructor(
@@ -13,7 +14,7 @@ export class GsvSatellite {
 export class GSV extends TalkerSentence {
 	public static readonly ID: string = "GSV"
 
-	constructor(data: string) {
+	constructor(data: RawNmeaSentence) {
 		super(data);
 	}
 

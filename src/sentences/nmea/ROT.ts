@@ -1,9 +1,10 @@
 import {TalkerSentence} from "../../types/sentences/TalkerSentence";
+import {RawNmeaSentence} from "../../types/sentences/RawNmeaSentence";
 
 export class ROT extends TalkerSentence {
 	public static readonly ID: string = "ROT"
 
-	constructor(data: string) {
+	constructor(data: RawNmeaSentence) {
 		super(data);
 	}
 

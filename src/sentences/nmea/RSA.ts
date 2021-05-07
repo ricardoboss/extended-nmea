@@ -1,9 +1,10 @@
 import {TalkerSentence} from "../../types/sentences/TalkerSentence";
+import {RawNmeaSentence} from "../../types/sentences/RawNmeaSentence";
 
 export class RSA extends TalkerSentence {
 	public static readonly ID: string = "RSA"
 
-	constructor(data: string) {
+	constructor(data: RawNmeaSentence) {
 		super(data);
 	}
 

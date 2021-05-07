@@ -1,13 +1,14 @@
 import {TalkerSentence} from "../../types/sentences/TalkerSentence";
 import {Helpers} from "../../helpers";
+import {DateOnly, Latitude, Longitude, TimeOnly} from "../../types";
+import {RawNmeaSentence} from "../../types/sentences/RawNmeaSentence";
 import parseTime = Helpers.parseTime;
 import parseDate = Helpers.parseDate;
-import {DateOnly, Latitude, Longitude, TimeOnly} from "../../types/utils";
 
 export class RMC extends TalkerSentence {
 	public static readonly ID: string = "RMC"
 
-	constructor(data: string) {
+	constructor(data: RawNmeaSentence) {
 		super(data);
 	}
 
