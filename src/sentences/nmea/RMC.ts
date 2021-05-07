@@ -5,6 +5,18 @@ import {RawNmeaSentence} from "../../types/sentences/RawNmeaSentence";
 import parseTime = Helpers.parseTime;
 import parseDate = Helpers.parseDate;
 
+export enum RmcMode {
+	Autonomous = "A",
+	Differential = "D",
+	Estimated = "E",
+	FloatRTK = "F",
+	Manual = "M",
+	NoFix = "N",
+	Precise = "P",
+	RTK = "R",
+	Simulator = "S",
+}
+
 export class RMC extends TalkerSentence {
 	public static readonly ID: string = "RMC"
 
@@ -16,8 +28,8 @@ export class RMC extends TalkerSentence {
 		return parseTime(this.dataFields[0]);
 	}
 
-	public get status(): string {
-		return this.dataFields[1];
+	public get active(): boolean {
+		return this.dataFields[1] === 'A';
 	}
 
 	public get latitude(): Latitude {
@@ -55,7 +67,16 @@ export class RMC extends TalkerSentence {
 		return (east ? -1 : 1) * degrees;
 	}
 
+	public get mode(): RmcMode|null {
+		if (this.dataFields.length === 11)
+			return null;
+
+		return this.dataFields[11] as RmcMode;
+	}
+
 	public get valid(): boolean {
-		return super.valid && this.dataFields.length === 11;
+		const fieldCount = this.dataFields.length;
+
+		return super.valid && (fieldCount === 11 || fieldCount === 12);
 	}
 }
