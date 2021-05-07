@@ -1,4 +1,4 @@
-import {INmeaSentence} from "../interfaces/INmeaSentence";
+import {INmeaSentence} from "../interfaces";
 import {RawNmeaSentence} from "./RawNmeaSentence";
 import {SentenceType} from "../SentenceType";
 
@@ -14,9 +14,9 @@ export class NmeaSentence implements INmeaSentence {
 	public static readonly Suffix: string = "\r\n";
 
 	/**
-	 * The raw line given to the constructor.
+	 * The raw line given to the constructor. Can be changed.
 	 */
-	public readonly raw: string;
+	public raw: string;
 
 	/**
 	 * The type of this sentence.

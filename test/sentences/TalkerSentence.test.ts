@@ -50,4 +50,18 @@ describe('Talker Sentence', function () {
 		expect(testSentence6.sentenceId).to.equal("");
 		expect(testSentence7.sentenceId).to.equal("ABCDEFG");
 	});
+
+	it('allows update of source data', function () {
+		let testSentence = new TalkerSentence('$--NAV,0.05,2.3*6D\r\n');
+
+		expect(testSentence.valid).to.equal(true);
+
+		testSentence.raw = '$--NAV,0.15,2.3*6D\r\n';
+
+		expect(testSentence.valid).to.equal(false);
+
+		testSentence.raw = '$--NAV,0.15,2.3*6C\r\n';
+
+		expect(testSentence.valid).to.equal(true);
+	});
 });

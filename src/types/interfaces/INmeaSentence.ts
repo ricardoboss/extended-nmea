@@ -2,9 +2,9 @@ import {SentenceType} from "../SentenceType";
 
 export interface INmeaSentence {
 	/**
-	 * The raw line given to the constructor.
+	 * The raw line given to the constructor. Can be changed.
 	 */
-	readonly raw: string;
+	raw: string;
 
 	/**
 	 * Whether or not this sentence is a valid NMEA0183 sentence.
