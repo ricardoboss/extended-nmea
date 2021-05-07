@@ -1,6 +1,6 @@
 {
   "name": "extended-nmea",
-  "version": "2.0.0-beta6",
+  "version": "2.0.0-beta7",
   "description": "A TypeScript library for parsing NMEA0183-like sentences with support for custom and proprietary sentences.",
   "repository": "https://github.com/ricardoboss/extended-nmea",
   "authors": [
