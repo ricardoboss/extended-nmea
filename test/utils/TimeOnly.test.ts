@@ -1,6 +1,6 @@
 import {describe} from "mocha";
 import {expect} from "chai";
-import {TimeOnly} from "../../src/types/utils";
+import {TimeOnly} from "../../src";
 
 describe('Utils', function () {
 	describe('TimeOnly', function () {

@@ -1,3 +1,3 @@
-import {INmeaSentence} from "../interfaces/INmeaSentence";
+import {INmeaSentence} from "../interfaces";
 
 export declare type RawNmeaSentence = INmeaSentence | string;

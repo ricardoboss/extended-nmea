@@ -1,6 +1,6 @@
 import {RawNmeaSentence} from "./RawNmeaSentence";
 import {ChecksumSentence} from "./ChecksumSentence";
-import {ITalkerSentence} from "../interfaces/ITalkerSentence";
+import {ITalkerSentence} from "../interfaces";
 import {NmeaSentence} from "./NmeaSentence";
 import {SentenceType} from "../SentenceType";
 

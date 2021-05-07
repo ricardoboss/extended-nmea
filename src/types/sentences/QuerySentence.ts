@@ -1,6 +1,6 @@
 import {NmeaSentence} from "./NmeaSentence";
 import {RawNmeaSentence} from "./RawNmeaSentence";
-import {IQuerySentence} from "../interfaces/IQuerySentence";
+import {IQuerySentence} from "../interfaces";
 import {SentenceType} from "../SentenceType";
 
 export class QuerySentence extends NmeaSentence implements IQuerySentence {

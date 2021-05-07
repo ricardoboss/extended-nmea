@@ -1,4 +1,4 @@
-import {TimeOnly, DateOnly} from "./types/utils";
+import {TimeOnly, DateOnly} from "./types";
 
 export module Helpers {
 	/**

@@ -1,5 +1,5 @@
 import {describe} from "mocha";
-import {ROT, Decoder, RSA} from "../../../src";
+import {Decoder, RSA} from "../../../src";
 import {expect} from "chai";
 
 describe('Sentence', function () {

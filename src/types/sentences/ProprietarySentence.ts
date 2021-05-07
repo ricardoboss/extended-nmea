@@ -1,7 +1,7 @@
 import {RawNmeaSentence} from "./RawNmeaSentence";
 import {ChecksumSentence} from "./ChecksumSentence";
 import {NmeaSentence} from "./NmeaSentence";
-import {IProprietarySentence} from "../interfaces/IProprietarySentence";
+import {IProprietarySentence} from "../interfaces";
 import {SentenceType} from "../SentenceType";
 
 export abstract class ProprietarySentence extends ChecksumSentence implements IProprietarySentence {

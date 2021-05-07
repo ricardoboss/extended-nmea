@@ -1,10 +1,12 @@
-import {INmeaSentence} from "./types/interfaces/INmeaSentence";
-import {ITalkerSentenceConstructor} from "./types/interfaces/ITalkerSentenceConstructor";
+import {
+	INmeaSentence,
+	IProprietarySentence,
+	IProprietarySentenceConstructor,
+	IQuerySentence,
+	ITalkerSentence,
+	ITalkerSentenceConstructor
+} from "./types";
 import {QuerySentence} from "./types/sentences/QuerySentence";
-import {IProprietarySentenceConstructor} from "./types/interfaces/IProprietarySentenceConstructor";
-import {IQuerySentence} from "./types/interfaces/IQuerySentence";
-import {IProprietarySentence} from "./types/interfaces/IProprietarySentence";
-import {ITalkerSentence} from "./types/interfaces/ITalkerSentence";
 import * as Sentence from "./sentences";
 
 export class Decoder {
