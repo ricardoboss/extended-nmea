@@ -1,9 +1,10 @@
 import {TalkerSentence} from "../../types/sentences/TalkerSentence";
 import {Helpers} from "../../helpers";
-import {DateOnly, Latitude, Longitude, TimeOnly} from "../../types";
+import {DateOnly, GeoCoordinate, TimeOnly} from "../../types";
 import {RawNmeaSentence} from "../../types/sentences/RawNmeaSentence";
 import parseTime = Helpers.parseTime;
 import parseDate = Helpers.parseDate;
+import parseGeoCoordinate = Helpers.parseGeoCoordinate;
 
 export enum RmcMode {
 	Autonomous = "A",
@@ -32,20 +33,12 @@ export class RMC extends TalkerSentence {
 		return this.dataFields[1] === 'A';
 	}
 
-	public get latitude(): Latitude {
-		return parseFloat(this.dataFields[2]);
+	public get latitude(): GeoCoordinate {
+		return parseGeoCoordinate(this.dataFields[2], this.dataFields[3]);
 	}
 
-	public get north(): boolean {
-		return this.dataFields[3] === 'N';
-	}
-
-	public get longitude(): Longitude {
-		return parseFloat(this.dataFields[4]);
-	}
-
-	public get east(): boolean {
-		return this.dataFields[5] === 'E';
+	public get longitude(): GeoCoordinate {
+		return parseGeoCoordinate(this.dataFields[4], this.dataFields[5]);
 	}
 
 	public get speedOverGround(): number {
