@@ -7,3 +7,4 @@ export {GSA, GsaFix, GsaMode} from './nmea/GSA';
 export {GSV, GsvSatellite} from './nmea/GSV';
 export {RSA} from './nmea/RSA';
 export {DPT} from './nmea/DPT';
+export {MTW} from './nmea/MTW';
