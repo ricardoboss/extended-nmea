@@ -24,8 +24,8 @@
     "test:watch": "npm run test -- --watch --watch-extensions ts --watch-files src,test --reporter min",
     "build": "cross-env NODE_ENV=production tsc",
     "clean": "rimraf ./dist",
-    "publish": "yarn run clean && yarn run build && yarn publish",
-    "publish:beta": "yarn run clean && yarn run build && yarn publish --tag beta"
+    "pub": "yarn run clean && yarn run build && yarn publish",
+    "pub:beta": "yarn run clean && yarn run build && yarn publish --tag beta"
   },
   "devDependencies": {
     "@types/chai": "^4.2.17",
