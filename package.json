@@ -1,30 +1,41 @@
 {
-    "name": "extended-nmea",
-    "description": "A parser for the NMEA 0183 protocol and some additional formats.",
-    "version": "1.0.1",
-    "type": "module",
-    "authors": [
-        "James Penn <james@jamespenn.co.uk>",
-        "Ricardo Boss <contact@ricardoboss.de>"
-    ],
-    "license": "MIT",
-    "main": "extended-nmea",
-    "keywords": [
-        "gps",
-        "nmea",
-        "parser"
-    ],
-    "repository": "git://github.com/ricardoboss/extended-nmea",
-    "devDependencies": {
-        "line-reader": "0.2",
-        "mocha": "^8.1.1",
-        "should": "~2.0.2"
-    },
-    "dependencies": {
-        "JSONStream": "0.7",
-        "through": ">=2.2.7 <3"
-    },
-    "scripts": {
-        "test": "npx mocha --ui bdd"
-    }
+  "name": "extended-nmea",
+  "version": "2.0.0",
+  "description": "A TypeScript library for parsing NMEA0183-like sentences with support for custom and proprietary sentences.",
+  "repository": "https://github.com/ricardoboss/extended-nmea",
+  "authors": [
+    "Ricardo Boss <contact@ricardoboss.de>"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "gps",
+    "nmea",
+    "parser",
+    "nmea0183",
+    "decoder"
+  ],
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "./dist"
+  ],
+  "scripts": {
+    "test": "cross-env TS_NODE_TRANSPILE_ONLY=true NODE_ENV=test mocha --ui bdd --recursive --require ts-node/register test/**/*.test.ts",
+    "test:watch": "npm run test -- --watch --watch-extensions ts --watch-files src,test --reporter min",
+    "build": "cross-env NODE_ENV=production tsc",
+    "clean": "rimraf ./dist",
+    "pub": "yarn run clean && yarn run build && yarn publish",
+    "pub:beta": "yarn run clean && yarn run build && yarn publish --tag beta"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.2.17",
+    "@types/mocha": "^8.2.2",
+    "@types/node": "^15.0.1",
+    "chai": "^4.3.4",
+    "cross-env": "^7.0.3",
+    "mocha": "^8.3.2",
+    "rimraf": "^3.0.2",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.2.4"
+  }
 }
