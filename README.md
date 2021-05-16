@@ -27,6 +27,7 @@ import {ROT} from "extended-nmea";
 
 const rotSentence = Decoder.decode("$--ROT,0.02,A*14\r\n") as ROT;
 
+console.log(rotSentence.sentenceId);    // output: "ROT"
 console.log(rotSentence.rateOfTurn);    // output: 0.02
 console.log(rotSentence.statusValid);   // output: true
 ```
@@ -73,6 +74,8 @@ Decoder.registerProprietary(MyCustomSentence.ManufacturerId, MyCustomSentence);
 
 const myCustomSentence = Decoder.decode("$PABC,123\r\n");
 
+console.log(myCustomSentence.manufacturerId); // output: "ABC"
+console.log(myCustomSentence.type); // output: "proprietary"
 console.log(myCustomSentence.firstField); // output: "123"
 ```
 
@@ -126,6 +129,9 @@ When I began my original project, I wanted to harness the power of type safety f
 was _not_ type safe, it didn't play well with the rest of the code. That's why I created this version of my fork, which
 is a completely new implementation with the same idea, just with TypeScript support.
 
+In the end, I created [ricardoboss/vessel-state][5], which uses this library to update a Vuex store's state,
+representing a vessel with the latest information available.
+
 ---
 
 ## License
@@ -137,3 +143,4 @@ Please review the [LICENSE file][2] for more information.
 [2]: https://github.com/ricardoboss/extended-nmea/blob/develop/LICENSE
 [3]: https://github.com/ricardoboss/extended-nmea/blob/develop/docs/NMEA0183.pdf
 [4]: https://github.com/jamesp/node-nmea
+[5]: https://github.com/ricardoboss/vessel-state
