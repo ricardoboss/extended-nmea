@@ -44,12 +44,13 @@ export class Decoder {
 		if (typeof data !== 'string')
 			throw new Error(`Unable to decode sentence: invalid data type: ${typeof data}. Only strings are supported.`);
 
-		if (data.length > 5 && data[5] === 'Q') {
-			return this.decodeQuery(data);
-		}
-
+		// check proprietary sentences first to prevent false positives
 		if (data.length > 1 && data[1] === 'P') {
 			return this.decodeProprietary(data);
+		}
+
+		if (data.length > 5 && data[5] === 'Q') {
+			return this.decodeQuery(data);
 		}
 
 		return this.decodeTalker(data);
