@@ -54,7 +54,8 @@ console.log(genericSentence.statusValid);   // output: true
 To support proprietary sentences and have the ability to add custom ones, you can register them before decoding:
 
 ```typescript
-import {ProprietarySentence, RawNmeaSentence} from "extended-nmea";
+import { ProprietarySentence } from 'extended-nmea/dist/types/sentences/ProprietarySentence';
+import { RawNmeaSentence } from 'extended-nmea/dist/types/sentences/RawNmeaSentence';
 
 // you can also extend TalkerSentence to add a custom sentence in the form of "$AABBB,xxx*CC", where BBB is your custom id.
 class MyCustomSentence extends ProprietarySentence {
@@ -77,6 +78,45 @@ const myCustomSentence = Decoder.decode("$PABC,123\r\n");
 console.log(myCustomSentence.manufacturerId); // output: "ABC"
 console.log(myCustomSentence.type); // output: "proprietary"
 console.log(myCustomSentence.firstField); // output: "123"
+```
+
+To support complex properietry sentences which return unions you can add a `dataFieldsParsed` getter.
+
+```typescript
+import { ProprietarySentence } from 'extended-nmea/dist/types/sentences/ProprietarySentence';
+import { RawNmeaSentence } from 'extended-nmea/dist/types/sentences/RawNmeaSentence';
+
+interface ComplexAbcMessage1 {
+  arg1: string;
+}
+interface ComplexAbcMessage2 {
+  arg2: string;
+}
+type ComplexAbcMessage = ComplexAbcMessage1 | ComplexAbcMessage2;
+
+class MyCustomSentence extends ProprietarySentence {
+  public static readonly ManufacturerId = "ABC";
+
+  constructor(data: RawNmeaSentence) {
+    super(data, MyCustomSentence.ManufacturerId);
+  }
+
+  public get dataFieldsParsed(): ComplexAbcMessage {
+    // Note that this returns a union type
+    return this.fields[0] === "SHOULD_BE_TYPE_1"
+			? { arg1: this.fields[0] }
+			? { arg2: this.fields[0] };
+  }
+}
+
+// use `Decoder.register` for talker sentences
+Decoder.registerProprietary(MyCustomSentence.ManufacturerId, MyCustomSentence);
+
+const myCustomSentence = Decoder.decode("$PABC,SHOULD_BE_TYPE_1\r\n");
+
+console.log(myCustomSentence.manufacturerId); // output: "ABC"
+console.log(myCustomSentence.type); // output: "proprietary"
+console.log(myCustomSentence.dataFieldsParsed); // output: {arg1: "123"}
 ```
 
 You can also remove previously registered (or even stock) sentences using the `unregister` methods:

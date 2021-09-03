@@ -1,11 +1,25 @@
 import {TalkerSentence} from "../../types/sentences/TalkerSentence";
 import {RawNmeaSentence} from "../../types/sentences/RawNmeaSentence";
 
+export interface IDataFieldsParsedDPT {
+	depth: number;
+	transducerOffset: number|null;
+	maxDepthRange: number|null;
+}
+
 export class DPT extends TalkerSentence {
 	public static readonly ID: string = "DPT"
 
 	constructor(data: RawNmeaSentence) {
 		super(data);
+	}
+
+	public get dataFieldsParsed(): IDataFieldsParsedDPT {
+		return {
+			depth: this.depth,
+			transducerOffset: this.transducerOffset,
+			maxDepthRange: this.maxDepthRange,
+		}
 	}
 
 	public get depth(): number {

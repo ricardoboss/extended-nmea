@@ -12,11 +12,31 @@ export enum GsaFix {
 	Fix3D = 3
 }
 
+export interface IDataFieldsParsedGSA {
+	mode: GsaMode;
+	fix: GsaFix;
+	ids: number[];
+	positionalDop: number;
+	horizontalDop: number;
+	verticalDop: number;
+}
+
 export class GSA extends TalkerSentence {
 	public static readonly ID: string = "GSA"
 
 	constructor(data: RawNmeaSentence) {
 		super(data);
+	}
+
+	public get dataFieldsParsed(): IDataFieldsParsedGSA {
+		return {
+			mode: this.mode,
+			fix: this.fix,
+			ids: this.ids,
+			positionalDop: this.positionalDop,
+			horizontalDop: this.horizontalDop,
+			verticalDop: this.verticalDop,
+		}
 	}
 
 	public get mode(): GsaMode {

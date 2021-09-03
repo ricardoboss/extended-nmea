@@ -4,11 +4,39 @@ import {GeoCoordinate} from "../../types";
 import {RawNmeaSentence} from "../../types/sentences/RawNmeaSentence";
 import parseGeoCoordinate = Helpers.parseGeoCoordinate;
 
+export interface IDataFieldsParsedRMB {
+  crossTrackError: number; 
+  directionToSteer: string; 
+  destinationWaypointId: string;
+  lastWaypointId: string;
+  destinationLatitude: GeoCoordinate;
+  destinationLongitude: GeoCoordinate;
+  destinationDistance: number;
+  destinationBearing: number; 
+  destinationClosingVelocity: number; 
+  arrivalCircleEntered: boolean; 
+}
+
 export class RMB extends TalkerSentence {
 	public static readonly ID: string = "RMB"
 
 	constructor(data: RawNmeaSentence) {
 		super(data);
+	}
+
+	public get dataFieldsParsed(): IDataFieldsParsedRMB {
+		return {
+			crossTrackError: this.crossTrackError, 
+			directionToSteer: this.directionToSteer, 
+			destinationWaypointId: this.destinationWaypointId,
+			lastWaypointId: this.lastWaypointId,
+			destinationLatitude: this.destinationLatitude,
+			destinationLongitude: this.destinationLongitude,
+			destinationDistance: this.destinationDistance,
+			destinationBearing: this.destinationBearing, 
+			destinationClosingVelocity: this.destinationClosingVelocity, 
+			arrivalCircleEntered: this.arrivalCircleEntered, 
+		}
 	}
 
 	public get warning(): boolean {

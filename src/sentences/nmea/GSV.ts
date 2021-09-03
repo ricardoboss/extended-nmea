@@ -11,11 +11,27 @@ export class GsvSatellite {
 	}
 }
 
+export interface IDataFieldsParsedGSV {
+	messageCount: number;
+	messageNumber: number;
+	totalMessageCount: number;
+	satellites: Iterable<GsvSatellite>;
+}
+
 export class GSV extends TalkerSentence {
 	public static readonly ID: string = "GSV"
 
 	constructor(data: RawNmeaSentence) {
 		super(data);
+	}
+
+	public get dataFieldsParsed(): IDataFieldsParsedGSV {
+		return {
+			messageCount: this.messageCount,
+			messageNumber: this.messageNumber,
+			totalMessageCount: this.totalMessageCount,
+			satellites: this.satellites(),
+		}
 	}
 
 	public get messageCount(): number {

@@ -1,11 +1,21 @@
 import {TalkerSentence} from "../../types/sentences/TalkerSentence";
 import {RawNmeaSentence} from "../../types/sentences/RawNmeaSentence";
 
+export interface IDataFieldsParsedHDT {
+	heading: number;
+}
+
 export class HDT extends TalkerSentence {
 	public static readonly ID: string = "HDT"
 
 	constructor(data: RawNmeaSentence) {
 		super(data);
+	}
+
+	public get dataFieldsParsed(): IDataFieldsParsedHDT {
+		return {
+			heading: this.heading
+		}
 	}
 
 	public get heading(): number {

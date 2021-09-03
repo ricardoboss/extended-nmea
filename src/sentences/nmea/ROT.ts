@@ -1,11 +1,21 @@
 import {TalkerSentence} from "../../types/sentences/TalkerSentence";
 import {RawNmeaSentence} from "../../types/sentences/RawNmeaSentence";
 
+export interface IDataFieldsParsedROT {
+	rateOfTurn: number;
+}
+
 export class ROT extends TalkerSentence {
 	public static readonly ID: string = "ROT"
 
 	constructor(data: RawNmeaSentence) {
 		super(data);
+	}
+
+	public get dataFieldsParsed(): IDataFieldsParsedROT {
+		return {
+			rateOfTurn: this.rateOfTurn
+		}
 	}
 
 	public get rateOfTurn(): number {
