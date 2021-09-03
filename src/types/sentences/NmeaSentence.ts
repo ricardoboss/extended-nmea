@@ -87,7 +87,7 @@ export class NmeaSentence implements INmeaSentence {
 	 * It is particularly useful when a ProprietarySentence for a single manufacturer has multiple message formats as you
 	 * can return a union type from `dataFieldsParsed`
 	 */
-	protected get dataFieldsParsed(): unknown {
+	public get dataFieldsParsed(): unknown {
 		return {}
 	}
 }
