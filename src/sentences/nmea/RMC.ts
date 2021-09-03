@@ -18,11 +18,37 @@ export enum RmcMode {
 	Simulator = "S",
 }
 
+export interface IDataFieldsParsedRMC {
+	time: TimeOnly; 
+	active: boolean;
+	latitude: GeoCoordinate;
+	longitude: GeoCoordinate;
+	speedOverGround: number;
+	trackingAngle: number;
+	date: DateOnly;
+	magneticVariation: number;
+	mode: RmcMode|null;
+}
+
 export class RMC extends TalkerSentence {
 	public static readonly ID: string = "RMC"
 
 	constructor(data: RawNmeaSentence) {
 		super(data);
+	}
+
+	public get dataFieldsParsed(): IDataFieldsParsedRMC {
+		return {
+			time: this.time, 
+			active: this.active,
+			latitude: this.latitude,
+			longitude: this.longitude,
+			speedOverGround: this.speedOverGround,
+			trackingAngle: this.trackingAngle,
+			date: this.date,
+			magneticVariation: this.magneticVariation,
+			mode: this.mode,
+		}
 	}
 
 	public get time(): TimeOnly {

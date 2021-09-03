@@ -79,6 +79,44 @@ console.log(myCustomSentence.type); // output: "proprietary"
 console.log(myCustomSentence.firstField); // output: "123"
 ```
 
+To support complex properietry sentences which return unions you can add a `dataFieldsParsed` getter.
+
+```typescript
+import { ProprietarySentence, RawNmeaSentence } from "extended-nmea";
+
+interface ComplexAbcMessage1 {
+  arg1: string;
+}
+interface ComplexAbcMessage2 {
+  arg2: string;
+}
+type ComplexAbcMessage = ComplexAbcMessage1 | ComplexAbcMessage2;
+
+class MyCustomSentence extends ProprietarySentence {
+  public static readonly ManufacturerId = "ABC";
+
+  constructor(data: RawNmeaSentence) {
+    super(data, MyCustomSentence.ManufacturerId);
+  }
+
+  public get SHOULD_BE_TYPE_1(): ComplexAbcMessage {
+    // Note that this returns a union type
+    return this.fields[0] === "SHOULD_BE_TYPE_1"
+			? { arg1: this.fields[0] }
+			? { arg2: this.fields[0] };
+  }
+}
+
+// use `Decoder.register` for talker sentences
+Decoder.registerProprietary(MyCustomSentence.ManufacturerId, MyCustomSentence);
+
+const myCustomSentence = Decoder.decode("$PABC,SHOULD_BE_TYPE_1\r\n");
+
+console.log(myCustomSentence.manufacturerId); // output: "ABC"
+console.log(myCustomSentence.type); // output: "proprietary"
+console.log(myCustomSentence.SHOULD_BE_TYPE_1); // output: {arg1: "123"}
+```
+
 You can also remove previously registered (or even stock) sentences using the `unregister` methods:
 
 ```typescript

@@ -17,11 +17,39 @@ export enum GgaQualityIndicator {
 	Simulation = 8
 }
 
+export interface IDataFieldsParsedGGA {
+	time: TimeOnly;
+	latitude: GeoCoordinate;
+	longitude: GeoCoordinate;
+	gpsQuality: GgaQualityIndicator;
+	satellitesInView: number;
+	horizontalDOP: number;
+	altMean: number;
+	geoidalSeparation: number;
+	differentialAge: number|null;
+	differentialStationId: number;
+}
+
 export class GGA extends TalkerSentence {
 	public static readonly ID: string = "GGA"
 
 	constructor(data: RawNmeaSentence) {
 		super(data);
+	}
+
+	public get dataFieldsParsed(): IDataFieldsParsedGGA {
+		return {
+			time: this.time,
+			latitude: this.latitude,
+			longitude: this.longitude,
+			gpsQuality: this.gpsQuality,
+			satellitesInView: this.satellitesInView,
+			horizontalDOP: this.horizontalDOP,
+			altMean: this.altMean,
+			geoidalSeparation: this.geoidalSeparation,
+			differentialAge: this.differentialAge,
+			differentialStationId: this.differentialStationId,
+		}
 	}
 
 	public get time(): TimeOnly {

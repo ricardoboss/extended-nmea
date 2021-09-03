@@ -1,11 +1,21 @@
 import {TalkerSentence} from "../../types/sentences/TalkerSentence";
 import {RawNmeaSentence} from "../../types/sentences/RawNmeaSentence";
 
+export interface IDataFieldsParsedMTW {
+	temperature: number;
+}
+
 export class MTW extends TalkerSentence {
 	public static readonly ID: string = "MTW"
 
 	constructor(data: RawNmeaSentence) {
 		super(data);
+	}
+
+	public get dataFieldsParsed(): IDataFieldsParsedMTW {
+		return {
+			temperature: this.temperature,
+		}
 	}
 
 	public get temperature(): number {

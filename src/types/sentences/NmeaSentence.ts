@@ -81,4 +81,13 @@ export class NmeaSentence implements INmeaSentence {
 	public get fields(): string[] {
 		return this.dataNoFixtures.split(',');
 	}
+
+	/**
+	 * Returns all the parsed data fields. This function should be over-written in when creating any TalkerSentence or ProprietarySentence
+	 * It is particularly useful when a ProprietarySentence for a single manufacturer has multiple message formats as you
+	 * can return a union type from `dataFieldsParsed`
+	 */
+	protected get dataFieldsParsed(): unknown {
+		return {}
+	}
 }

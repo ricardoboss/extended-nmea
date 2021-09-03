@@ -1,11 +1,28 @@
 import {TalkerSentence} from "../../types/sentences/TalkerSentence";
 import {RawNmeaSentence} from "../../types/sentences/RawNmeaSentence";
 
+
+export interface IDataFieldsParsedVTG {
+	trackingAngle: number;
+	magneticTrackingAngle: number;
+	speed: number;
+	speedKmh: number;
+}
+
 export class VTG extends TalkerSentence {
 	public static readonly ID: string = "VTG"
 
 	constructor(data: RawNmeaSentence) {
 		super(data);
+	}
+
+	public get dataFieldsParsed(): IDataFieldsParsedVTG {
+		return {
+			trackingAngle: this.trackingAngle,
+			magneticTrackingAngle: this.magneticTrackingAngle,
+			speed: this.speed,
+			speedKmh: this.speedKmh,
+		}
 	}
 
 	public get trackingAngle(): number {

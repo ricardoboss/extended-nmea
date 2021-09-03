@@ -4,11 +4,33 @@ import {GeoCoordinate} from "../../types";
 import {RawNmeaSentence} from "../../types/sentences/RawNmeaSentence";
 import parseGeoCoordinate = Helpers.parseGeoCoordinate;
 
+export interface IDataFieldsParsedRMA {
+	latitude: GeoCoordinate;
+	longitude: GeoCoordinate;
+	timeDifferenceA: number;
+	timeDifferenceB: number;
+	speedOverGround: number;
+	trackMadeGood: number;
+	magneticVariation: number;
+}
+
 export class RMA extends TalkerSentence {
 	public static readonly ID: string = "RMA"
 
 	constructor(data: RawNmeaSentence) {
 		super(data);
+	}
+
+	public get dataFieldsParsed(): IDataFieldsParsedRMA {
+		return {
+			latitude: this.latitude,
+			longitude: this.longitude,
+			timeDifferenceA: this.timeDifferenceA,
+			timeDifferenceB: this.timeDifferenceB,
+			speedOverGround: this.speedOverGround,
+			trackMadeGood: this.trackMadeGood,
+			magneticVariation: this.magneticVariation,
+		}
 	}
 
 	public get warning(): boolean {
