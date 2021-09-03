@@ -54,7 +54,8 @@ console.log(genericSentence.statusValid);   // output: true
 To support proprietary sentences and have the ability to add custom ones, you can register them before decoding:
 
 ```typescript
-import {ProprietarySentence, RawNmeaSentence} from "extended-nmea";
+import { ProprietarySentence } from 'extended-nmea/dist/types/sentences/ProprietarySentence';
+import { RawNmeaSentence } from 'extended-nmea/dist/types/sentences/RawNmeaSentence';
 
 // you can also extend TalkerSentence to add a custom sentence in the form of "$AABBB,xxx*CC", where BBB is your custom id.
 class MyCustomSentence extends ProprietarySentence {
@@ -82,7 +83,8 @@ console.log(myCustomSentence.firstField); // output: "123"
 To support complex properietry sentences which return unions you can add a `dataFieldsParsed` getter.
 
 ```typescript
-import { ProprietarySentence, RawNmeaSentence } from "extended-nmea";
+import { ProprietarySentence } from 'extended-nmea/dist/types/sentences/ProprietarySentence';
+import { RawNmeaSentence } from 'extended-nmea/dist/types/sentences/RawNmeaSentence';
 
 interface ComplexAbcMessage1 {
   arg1: string;
