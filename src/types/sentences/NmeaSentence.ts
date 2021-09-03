@@ -88,6 +88,6 @@ export class NmeaSentence implements INmeaSentence {
 	 * can return a union type from `dataFieldsParsed`
 	 */
 	public get dataFieldsParsed(): unknown {
-		return {}
+		return undefined
 	}
 }
