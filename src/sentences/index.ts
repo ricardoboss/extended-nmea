@@ -1,5 +1,6 @@
 export {ROT} from './nmea/ROT';
 export {GGA, GgaQualityIndicator} from './nmea/GGA';
+export {GLL, GllPositionMode, GllStatus} from './nmea/GLL';
 export {HDT} from './nmea/HDT';
 export {RMC, RmcMode} from './nmea/RMC';
 export {VTG} from './nmea/VTG';
