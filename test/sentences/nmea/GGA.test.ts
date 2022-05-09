@@ -1,5 +1,5 @@
 import {describe} from "mocha";
-import {GGA, Decoder, GgaQualityIndicator} from "../../../src";
+import {GGA, Decoder, PositionFixQualityIndicator} from "../../../src";
 import {expect} from "chai";
 
 describe('Sentence', function () {
@@ -17,7 +17,7 @@ describe('Sentence', function () {
 			expect(decoded.longitude.degrees).to.equal(91);
 			expect(decoded.longitude.minutes).to.equal(47);
 			expect(decoded.longitude.quadrant).to.equal("W");
-			expect(decoded.gpsQuality).to.equal(GgaQualityIndicator.RTK);
+			expect(decoded.gpsQuality).to.equal(PositionFixQualityIndicator.FixedRTK);
 			expect(decoded.satellitesInView).to.equal(13);
 			expect(decoded.horizontalDOP).to.equal(0.9);
 			expect(decoded.altMean).to.equal(255.747);

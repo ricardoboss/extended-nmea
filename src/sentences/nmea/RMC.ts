@@ -2,21 +2,11 @@ import {TalkerSentence} from "../../types/sentences/TalkerSentence";
 import {Helpers} from "../../helpers";
 import {DateOnly, GeoCoordinate, TimeOnly} from "../../types";
 import {RawNmeaSentence} from "../../types/sentences/RawNmeaSentence";
+import {PositionFixStatus} from "./common/PositionFixStatus";
 import parseTime = Helpers.parseTime;
 import parseDate = Helpers.parseDate;
 import parseGeoCoordinate = Helpers.parseGeoCoordinate;
-
-export enum RmcMode {
-	Autonomous = "A",
-	Differential = "D",
-	Estimated = "E",
-	FloatRTK = "F",
-	Manual = "M",
-	NoFix = "N",
-	Precise = "P",
-	RTK = "R",
-	Simulator = "S",
-}
+import {PrecisePositionMode} from "./common/PositionMode";
 
 export class RMC extends TalkerSentence {
 	public static readonly ID: string = "RMC"
@@ -29,8 +19,8 @@ export class RMC extends TalkerSentence {
 		return parseTime(this.dataFields[0]);
 	}
 
-	public get active(): boolean {
-		return this.dataFields[1] === 'A';
+	public get status(): PositionFixStatus {
+		return this.dataFields[1] as PositionFixStatus;
 	}
 
 	public get latitude(): GeoCoordinate {
@@ -45,7 +35,7 @@ export class RMC extends TalkerSentence {
 		return parseFloat(this.dataFields[6]);
 	}
 
-	public get trackingAngle(): number {
+	public get courseOverGround(): number {
 		return parseFloat(this.dataFields[7]);
 	}
 
@@ -60,17 +50,27 @@ export class RMC extends TalkerSentence {
 		return (east ? -1 : 1) * degrees;
 	}
 
-	public get mode(): RmcMode|null {
-		if (this.dataFields.length === 11)
+	public get posMode(): PrecisePositionMode|null {
+		if (this.dataFields.length <= 11) {
 			return null;
+		}
 
-		return this.dataFields[11] as RmcMode;
+		return this.dataFields[11] as PrecisePositionMode;
+	}
+
+	public get navStatus(): PositionFixStatus|null {
+		if (this.dataFields.length <= 12) {
+			return null;
+		}
+
+		return this.dataFields[12] as PositionFixStatus;
 	}
 
 	public get valid(): boolean {
 		const fieldCount = this.dataFields.length;
 
-		return super.valid && (fieldCount === 11 || fieldCount === 12);
+		// NMEA 2.3 and later add a navStatus field
+		return super.valid && (fieldCount >= 11 && fieldCount <= 13);
 	}
 
 	public get invalidReason(): null | string {
@@ -78,8 +78,8 @@ export class RMC extends TalkerSentence {
 			return super.invalidReason;
 		}
 
-		if (this.dataFields.length !== 11 && this.dataFields.length !== 12) {
-			return `Expected 11 or 12 fields, got ${this.dataFields.length}`;
+		if (this.dataFields.length < 11 || this.dataFields.length > 13) {
+			return `Expected between 11 and 13 fields, got ${this.dataFields.length}`;
 		}
 
 		return null;

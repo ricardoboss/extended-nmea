@@ -2,20 +2,9 @@ import {TalkerSentence} from "../../types/sentences/TalkerSentence";
 import {Helpers} from "../../helpers";
 import {GeoCoordinate, TimeOnly} from "../../types";
 import {RawNmeaSentence} from "../../types/sentences/RawNmeaSentence";
+import {PositionFixQualityIndicator} from "./common/PositionFixQualityIndicator";
 import parseTime = Helpers.parseTime;
 import parseGeoCoordinate = Helpers.parseGeoCoordinate;
-
-export enum GgaQualityIndicator {
-	No_Fix = 0,
-	Gps = 1,
-	DifferentialGPS = 2,
-	PPS = 3,
-	RTK = 4,
-	RTKFloat = 5,
-	Estimated = 6,
-	Manual = 7,
-	Simulation = 8
-}
 
 export class GGA extends TalkerSentence {
 	public static readonly ID: string = "GGA"
@@ -36,8 +25,8 @@ export class GGA extends TalkerSentence {
 		return parseGeoCoordinate(this.dataFields[3], this.dataFields[4]);
 	}
 
-	public get gpsQuality(): GgaQualityIndicator {
-		return parseInt(this.dataFields[5]) as GgaQualityIndicator;
+	public get gpsQuality(): PositionFixQualityIndicator {
+		return parseInt(this.dataFields[5]) as PositionFixQualityIndicator;
 	}
 
 	public get satellitesInView(): number {

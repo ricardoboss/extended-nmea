@@ -1,5 +1,5 @@
 import {describe} from "mocha";
-import {Decoder, GLL, GllPositionMode, GllStatus} from "../../../src";
+import {Decoder, GLL, BroadPositionMode, PositionFixStatus} from "../../../src";
 import {expect} from "chai";
 
 describe('Sentence', function () {
@@ -19,8 +19,8 @@ describe('Sentence', function () {
 			expect(decoded.time.hours).to.equal(15);
 			expect(decoded.time.minutes).to.equal(47);
 			expect(decoded.time.seconds).to.equal(39);
-			expect(decoded.status).to.equal(GllStatus.Valid);
-			expect(decoded.posMode).to.equal(GllPositionMode.Fix);
+			expect(decoded.status).to.equal(PositionFixStatus.Valid);
+			expect(decoded.posMode).to.equal(BroadPositionMode.AutonomousFix);
 		});
 	});
 });

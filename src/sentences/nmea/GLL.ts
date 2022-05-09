@@ -2,20 +2,10 @@ import {TalkerSentence} from "../../types/sentences/TalkerSentence";
 import {Helpers} from "../../helpers";
 import {GeoCoordinate, TimeOnly} from "../../types";
 import {RawNmeaSentence} from "../../types/sentences/RawNmeaSentence";
+import {PositionFixStatus} from "./common/PositionFixStatus";
+import {BroadPositionMode} from "./common/PositionMode";
 import parseTime = Helpers.parseTime;
 import parseGeoCoordinate = Helpers.parseGeoCoordinate;
-
-export enum GllStatus {
-	Valid = "A",
-	Invalid = "V"
-}
-
-export enum GllPositionMode {
-	NoPosition = "N",
-	DeadReckoning = "E",
-	RTK = "D",
-	Fix = "A",
-}
 
 export class GLL extends TalkerSentence {
 	public static readonly ID: string = "GLL"
@@ -36,12 +26,12 @@ export class GLL extends TalkerSentence {
 		return parseTime(this.dataFields[4]);
 	}
 
-	public get status(): GllStatus {
-		return this.dataFields[5] as GllStatus;
+	public get status(): PositionFixStatus {
+		return this.dataFields[5] as PositionFixStatus;
 	}
 
-	public get posMode(): GllPositionMode {
-		return this.dataFields[6] as GllPositionMode;
+	public get posMode(): BroadPositionMode {
+		return this.dataFields[6] as BroadPositionMode;
 	}
 
 	public get valid(): boolean {
