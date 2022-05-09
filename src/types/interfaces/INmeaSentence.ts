@@ -17,6 +17,11 @@ export interface INmeaSentence {
 	readonly valid: boolean;
 
 	/**
+	 * A possible reason why this sentence is invalid. Requires valid to be invoked at least once and to return false.
+	 */
+	readonly invalidReason: null|string;
+
+	/**
 	 * Returns all fields (including the first field in the sentence) separated by comma.
 	 */
 	readonly fields: string[];

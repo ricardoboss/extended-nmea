@@ -46,4 +46,16 @@ export class GSV extends TalkerSentence {
 	public get valid(): boolean {
 		return super.valid && (this.dataFields.length - 3) % 4 === 0;
 	}
+
+	public get invalidReason(): null | string {
+		if (!super.valid) {
+			return super.invalidReason;
+		}
+
+		if ((this.dataFields.length - 3) % 4 !== 0) {
+			return "Invalid number of data fields: must contain a multiple of 4 data fields";
+		}
+
+		return null;
+	}
 }

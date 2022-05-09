@@ -47,8 +47,18 @@ export class RMA extends TalkerSentence {
 	}
 
 	public get valid(): boolean {
-		const fieldCount = this.dataFields.length;
+		return super.valid && this.dataFields.length === 11;
+	}
 
-		return super.valid && (fieldCount === 11);
+	public get invalidReason(): null | string {
+		if (!super.valid) {
+			return super.invalidReason;
+		}
+
+		if (this.dataFields.length !== 11) {
+			return `Expected 11 fields, got ${this.dataFields.length}`;
+		}
+
+		return null;
 	}
 }

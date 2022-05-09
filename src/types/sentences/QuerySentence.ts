@@ -47,4 +47,20 @@ export class QuerySentence extends NmeaSentence implements IQuerySentence {
 		// MAYBE: validate length of mnemonic (3)
 		return super.valid && this.idField.length === 5 && this.idField[4].toUpperCase() === 'Q';
 	}
+
+	public get invalidReason(): null|string {
+		if (!super.valid) {
+			return super.invalidReason;
+		}
+
+		if (this.idField.length !== 5) {
+			return `Invalid length of id field: expected 5, got ${this.idField.length}`;
+		}
+
+		if (this.idField[4].toUpperCase() !== 'Q') {
+			return `Invalid id field: expected Q at position 4, got ${this.idField[4]}`;
+		}
+
+		return null;
+	}
 }

@@ -56,8 +56,18 @@ export class RMB extends TalkerSentence {
 	}
 
 	public get valid(): boolean {
-		const fieldCount = this.dataFields.length;
+		return super.valid && this.dataFields.length === 13;
+	}
 
-		return super.valid && (fieldCount === 13);
+	public get invalidReason(): null | string {
+		if (!super.valid) {
+			return super.invalidReason;
+		}
+
+		if (this.dataFields.length !== 13) {
+			return `Expected 13 fields, got ${this.dataFields.length}`;
+		}
+
+		return null;
 	}
 }

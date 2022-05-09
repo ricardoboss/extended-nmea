@@ -68,6 +68,18 @@ export class NmeaSentence implements INmeaSentence {
 			this.raw.endsWith(this.suffix);
 	}
 
+	public get invalidReason(): null|string {
+		if (!this.raw.startsWith(this.prefix)) {
+			return 'The sentence does not start with the expected prefix.';
+		}
+
+		if (!this.raw.endsWith(this.suffix)) {
+			return 'The sentence does not end with the expected suffix.';
+		}
+
+		return null;
+	}
+
 	/**
 	 * Returns all characters between "$" and "<CR><LF>".
 	 */

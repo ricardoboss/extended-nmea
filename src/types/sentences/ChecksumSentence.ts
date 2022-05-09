@@ -57,4 +57,16 @@ export abstract class ChecksumSentence extends NmeaSentence {
 	public get valid(): boolean {
 		return super.valid && this.checksumValid;
 	}
+
+	public get invalidReason(): null|string {
+		if (!super.valid) {
+			return super.invalidReason;
+		}
+
+		if (!this.checksumValid) {
+			return 'The checksum is invalid.';
+		}
+
+		return null;
+	}
 }

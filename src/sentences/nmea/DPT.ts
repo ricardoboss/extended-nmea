@@ -33,4 +33,17 @@ export class DPT extends TalkerSentence {
 
 		return super.valid && (fieldCount === 2 || fieldCount === 3);
 	}
+
+	public get invalidReason(): null|string {
+		if (!super.valid) {
+			return super.invalidReason;
+		}
+
+		const fieldCount = this.dataFields.length;
+		if (fieldCount !== 2 && fieldCount !== 3) {
+			return `Expected 2 or 3 fields, got ${this.dataFields.length}`;
+		}
+
+		return null;
+	}
 }

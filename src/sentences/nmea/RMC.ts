@@ -72,4 +72,16 @@ export class RMC extends TalkerSentence {
 
 		return super.valid && (fieldCount === 11 || fieldCount === 12);
 	}
+
+	public get invalidReason(): null | string {
+		if (!super.valid) {
+			return super.invalidReason;
+		}
+
+		if (this.dataFields.length !== 11 && this.dataFields.length !== 12) {
+			return `Expected 11 or 12 fields, got ${this.dataFields.length}`;
+		}
+
+		return null;
+	}
 }

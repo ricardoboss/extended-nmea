@@ -46,4 +46,16 @@ export class GSA extends TalkerSentence {
 	public get valid(): boolean {
 		return super.valid && this.dataFields.length === 17;
 	}
+
+	public get invalidReason(): null | string {
+		if (!super.valid) {
+			return super.invalidReason;
+		}
+
+		if (this.dataFields.length !== 17) {
+			return `Expected 17 fields, got ${this.dataFields.length}`;
+		}
+
+		return null;
+	}
 }

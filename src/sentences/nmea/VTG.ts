@@ -43,4 +43,16 @@ export class VTG extends TalkerSentence {
 	public get valid(): boolean {
 		return super.valid && this.dataFields.length === 8;
 	}
+
+	public get invalidReason(): null | string {
+		if (!super.valid) {
+			return super.invalidReason;
+		}
+
+		if (this.dataFields.length !== 8) {
+			return `Expected 8 fields, got ${this.dataFields.length}`;
+		}
+
+		return null;
+	}
 }
