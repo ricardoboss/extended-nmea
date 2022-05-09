@@ -21,14 +21,20 @@ export class GeoCoordinate {
 		if (typeof encoded !== 'string' || typeof quadrant !== 'string')
 			throw new TypeError(`Cannot create GeoCoordinate instance with values other than strings.`);
 
-		if (encoded.length < 6)
-			throw new Error(`Expected at least 6 characters in encoded, got ${encoded.length}.`);
+		if (encoded.length < 3)
+			throw new Error(`Expected at least 3 characters in encoded, got ${encoded.length}.`);
 
 		if (!['N', 'S', 'E', 'W'].includes(quadrant))
 			throw new Error(`Expected exactly 1 character of [N, S, E, W], got ${quadrant}.`);
 
 		this.quadrant = quadrant;
-		this.degrees = parseInt(encoded.substr(0, encoded.indexOf('.') - 2));
-		this.decimal = parseFloat(encoded.substr(encoded.indexOf('.') - 2));
+		let splitAt = encoded.indexOf('.') - 2;
+		if (splitAt < 0) {
+			this.degrees = 0;
+			this.decimal = parseFloat(encoded);
+		} else {
+			this.degrees = parseInt(encoded.substring(0, splitAt));
+			this.decimal = parseFloat(encoded.substring(splitAt));
+		}
 	}
 }

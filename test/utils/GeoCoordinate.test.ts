@@ -23,5 +23,15 @@ describe('Utils', function () {
 			expect(lon1.quadrant).to.equal("E");
 			expect(lon1.decimalDegrees).to.be.approximately(8.64824, 1e-5);
 		});
+
+		it('parses short notation', function () {
+			const coord = new GeoCoordinate("0.08", "N");
+
+			expect(coord.degrees).to.equal(0);
+			expect(coord.minutes).to.equal(0);
+			expect(coord.seconds).to.equal(4);
+			expect(coord.quadrant).to.equal("N");
+			expect(coord.decimalDegrees).to.be.approximately(0.001333, 1e-5);
+		});
 	});
 });

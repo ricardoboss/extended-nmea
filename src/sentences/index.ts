@@ -10,3 +10,4 @@ export * from './nmea/GSV';
 export * from './nmea/RSA';
 export * from './nmea/DPT';
 export * from './nmea/MTW';
+export * from './nmea/DTM';
