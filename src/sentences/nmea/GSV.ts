@@ -43,8 +43,26 @@ export class GSV extends TalkerSentence {
 		}
 	}
 
+	public get signalId(): null|string {
+		if (this.dataFields.length % 4 === 0) {
+			return this.dataFields[this.dataFields.length - 1];
+		}
+
+		return null;
+	}
+
 	public get valid(): boolean {
-		return super.valid && (this.dataFields.length - 3) % 4 === 0;
+		if (!super.valid) {
+			return false;
+		}
+
+		const dataFieldLength = this.dataFields.length;
+		if ((dataFieldLength - 3) % 4 === 0) {
+			return true;
+		}
+
+		// NMEA 4.10 and later add a signalId field at the end of the GSV sentence
+		return dataFieldLength % 4 === 0;
 	}
 
 	public get invalidReason(): null | string {
@@ -52,10 +70,14 @@ export class GSV extends TalkerSentence {
 			return super.invalidReason;
 		}
 
-		if ((this.dataFields.length - 3) % 4 !== 0) {
-			return "Invalid number of data fields: must contain a multiple of 4 data fields";
+		if (this.dataFields.length % 4 === 0) {
+			return null;
 		}
 
-		return null;
+		if ((this.dataFields.length - 3) % 4 === 0) {
+			return null;
+		}
+
+		return "Invalid number of data fields: must contain a multiple of 4 data fields";
 	}
 }
