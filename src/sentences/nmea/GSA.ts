@@ -43,8 +43,19 @@ export class GSA extends TalkerSentence {
 		return parseFloat(this.dataFields[16]);
 	}
 
+	public get systemId(): null|string {
+		if (this.dataFields.length === 17) {
+			return null;
+		}
+
+		return this.dataFields[17];
+	}
+
 	public get valid(): boolean {
-		return super.valid && this.dataFields.length === 17;
+		const dataFieldsLength = this.dataFields.length;
+
+		// NMEA 4.10 added systemId field
+		return super.valid && (dataFieldsLength === 17 || dataFieldsLength === 18);
 	}
 
 	public get invalidReason(): null | string {
@@ -52,8 +63,8 @@ export class GSA extends TalkerSentence {
 			return super.invalidReason;
 		}
 
-		if (this.dataFields.length !== 17) {
-			return `Expected 17 fields, got ${this.dataFields.length}`;
+		if (this.dataFields.length !== 18 && this.dataFields.length !== 17) {
+			return `Expected 17 or 18 fields, got ${this.dataFields.length}`;
 		}
 
 		return null;
