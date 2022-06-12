@@ -2,11 +2,10 @@ import {TalkerSentence} from "../../types/sentences/TalkerSentence";
 import {Helpers} from "../../helpers";
 import {DateOnly, GeoCoordinate, TimeOnly} from "../../types";
 import {RawNmeaSentence} from "../../types/sentences/RawNmeaSentence";
-import {PositionFixStatus} from "./common/PositionFixStatus";
+import {PositionFixStatus, PrecisePositionMode} from "./common";
 import parseTime = Helpers.parseTime;
 import parseDate = Helpers.parseDate;
 import parseGeoCoordinate = Helpers.parseGeoCoordinate;
-import {PrecisePositionMode} from "./common/PositionMode";
 
 export class RMC extends TalkerSentence {
 	public static readonly ID: string = "RMC"

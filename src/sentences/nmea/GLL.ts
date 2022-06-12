@@ -2,8 +2,7 @@ import {TalkerSentence} from "../../types/sentences/TalkerSentence";
 import {Helpers} from "../../helpers";
 import {GeoCoordinate, TimeOnly} from "../../types";
 import {RawNmeaSentence} from "../../types/sentences/RawNmeaSentence";
-import {PositionFixStatus} from "./common/PositionFixStatus";
-import {BroadPositionMode} from "./common/PositionMode";
+import {PositionFixStatus, BroadPositionMode} from "./common";
 import parseTime = Helpers.parseTime;
 import parseGeoCoordinate = Helpers.parseGeoCoordinate;
 

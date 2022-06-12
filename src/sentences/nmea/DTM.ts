@@ -1,6 +1,6 @@
 import {TalkerSentence} from "../../types/sentences/TalkerSentence";
 import {RawNmeaSentence} from "../../types/sentences/RawNmeaSentence";
-import {DatumCode} from "./common/DatumCode";
+import {DatumCode} from "./common";
 import {GeoCoordinate} from "../../types";
 import {Helpers} from "../../helpers";
 import parseGeoCoordinate = Helpers.parseGeoCoordinate;
